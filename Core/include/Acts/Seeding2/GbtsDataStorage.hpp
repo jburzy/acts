@@ -167,16 +167,9 @@ struct GbtsEdge final {
   /// @param p1_ First fit parameter
   /// @param p2_ Second fit parameter
   /// @param p3_ Third fit parameter
-  /// @param dsdrD0_ ds/dr chord factor of the segment evaluated at the
-  ///        maximum impact parameter (1 for prompt configurations)
   GbtsEdge(const GbtsNode* n1_, const GbtsNode* n2_, float p1_, float p2_,
-           float p3_, float dsdrD0_ = 1.0f)
-      : n1{n1_},
-        n2{n2_},
-        level{1},
-        next{1},
-        p{p1_, p2_, p3_},
-        dsdrD0{dsdrD0_} {}
+           float p3_)
+      : n1{n1_}, n2{n2_}, level{1}, next{1}, p{p1_, p2_, p3_} {}
 
   /// First node of the edge
   const GbtsNode* n1{nullptr};
@@ -192,9 +185,6 @@ struct GbtsEdge final {
   std::uint8_t nNei{0};
   /// Fit parameters
   std::array<float, 3> p{};
-  /// ds/dr chord factor of the segment at the maximum impact parameter,
-  /// used to widen tau-matching cuts for displaced (LRT) tracks
-  float dsdrD0{1.0f};
 
   /// Global indices of the connected edges
   std::array<std::uint32_t, gbtsNumSegConns> vNei{};

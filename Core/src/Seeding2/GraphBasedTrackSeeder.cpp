@@ -238,7 +238,6 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
   const float maxCurv = options.ptCoeff / tripletPtMin;
 
   const bool lrt = m_cfg.lrtMode;
-  const float d0Max2 = m_cfg.d0Max * m_cfg.d0Max;
 
   // must stay consistent with the chain-length requirement applied in
   // extractSeedsFromTheGraph
@@ -387,13 +386,11 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
       const float r1 = n1pars[3];
       const float z1 = n1pars[4];
 
-      // arc-length chord factor ingredients for a track with impact
+      // position-azimuth swing bound ingredient for a track with impact
       // parameter up to d0Max, used by the displaced-aware cut widenings
-      float sD0n1 = 0.0f;
       float asinD0n1 = 0.0f;
 
       if (lrt) {
-        sD0n1 = std::sqrt(std::max(r1 * r1 - d0Max2, 0.0f));
         asinD0n1 = std::asin(std::min(1.0f, m_cfg.d0Max / std::max(r1, 1.0f)));
       }
 
@@ -531,16 +528,6 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
 
           const float expEta = fastHypot(1, tau) - tau;
 
-          // ds/dr chord factor of this segment for a track with impact
-          // parameter d0Max; tau = dz/dr of a displaced track scales with it,
-          // so it bounds the geometric tau variation between segments
-          float dsdrD0 = 1.0f;
-
-          if (lrt) {
-            const float sD0n2 = std::sqrt(std::max(r2 * r2 - d0Max2, 0.0f));
-            dsdrD0 = std::max((sD0n2 - sD0n1) / dr, 1e-3f);
-          }
-
           // match edge candidate against edges incoming to n2
           if (matchBeforeCreateGate) {
             // we must have enough incoming edges to decide
@@ -554,14 +541,40 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
                 const GbtsEdge& inEdge = edgeStorage.at(n2InIdx);
                 const float tauRatio = inEdge.p[0] * uat1 - 1.0f;
 
-                // widen the acceptance by the geometric tau variation of a
-                // displaced track between the two segments
-                float precut = m_cfg.tauRatioPrecut;
-                if (lrt) {
-                  precut += std::max(dsdrD0 / inEdge.dsdrD0 - 1.0f, 0.0f);
+                bool match = std::abs(tauRatio) <= m_cfg.tauRatioPrecut;
+
+                if (!match && lrt) {
+                  // widen the acceptance at the pair's implied impact
+                  // parameter (from the chord-slope difference of the two
+                  // segments), computed only in the marginal band
+                  const float r3p = inEdge.n2->r;
+                  const float dr23p = r3p - r2;
+
+                  if (dr23p > 1.0f) {
+                    const float d0Est = std::abs(curv - inEdge.p[1]) * r1 *
+                                        r2 * r3p / std::max(r3p - r1, 1.0f);
+                    const float d0Eff =
+                        std::min(d0Est + m_cfg.d0EstTolerance, m_cfg.d0Max);
+                    const float d0Eff2 = d0Eff * d0Eff;
+                    const float s1p =
+                        std::sqrt(std::max(r1 * r1 - d0Eff2, 0.0f));
+                    const float s2p =
+                        std::sqrt(std::max(r2 * r2 - d0Eff2, 0.0f));
+                    const float s3p =
+                        std::sqrt(std::max(r3p * r3p - d0Eff2, 0.0f));
+                    const float k12p = std::max((s2p - s1p) / dr, 1e-3f);
+                    const float k23p = std::max((s3p - s2p) / dr23p, 1e-3f);
+
+                    const float widen =
+                        std::max(k12p / k23p - 1.0f, 0.0f) +
+                        m_cfg.tauRatioZBiasCoeff * d0Eff *
+                            (1.0f / dr + 1.0f / dr23p) / fastHypot(1.0f, tau);
+
+                    match = std::abs(tauRatio) <= m_cfg.tauRatioPrecut + widen;
+                  }
                 }
 
-                if (std::abs(tauRatio) > precut) {  // bad match
+                if (!match) {  // bad match
                   continue;
                 }
                 isGood = true;  // good match found
@@ -584,7 +597,7 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
 
           if (nEdges < m_cfg.nMaxEdges) {
             edgeStorage.emplace_back(B1.vn[n1Idx], B2.vn[n2Idx], expEta, curv,
-                                     phi1 + dPhi1, dsdrD0);
+                                     phi1 + dPhi1);
 
             ++numCreatedEdges;
 
@@ -613,6 +626,67 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
                                          .layerDescription()
                                          .type == GbtsLayerType::Barrel;
 
+              // direction matching first: both direction estimates anchor at
+              // the shared node, so dPhi = (c12 - c23) * r2 with c_ab the
+              // position-azimuth chord slope of each segment. In the
+              // small-angle limit c_ab = d0/(r_a r_b) + kappa/2, so dPhi
+              // yields the triplet's implied transverse impact parameter:
+              //   d0Est = |dPhi| * r1 * r3 / (r3 - r1)
+              // which is then used to scale the remaining displaced-track
+              // widenings: combinations that do not consistently describe a
+              // displaced trajectory face prompt-tight cuts.
+              float dPhi = phi2u - pS->p[2];
+
+              if (dPhi < -std::numbers::pi_v<float>) {
+                dPhi += 2 * std::numbers::pi_v<float>;
+              } else if (dPhi > std::numbers::pi_v<float>) {
+                dPhi -= 2 * std::numbers::pi_v<float>;
+              }
+
+              const float r3 = pS->n2->r;
+              const float dr23 = r3 - r2;
+
+              float d0Eff = 0.0f;
+
+              if (lrt) {
+                const float d0Est =
+                    std::abs(dPhi) * r1 * r3 / std::max(r3 - r1, 1.0f);
+                d0Eff = std::min(d0Est + m_cfg.d0EstTolerance, m_cfg.d0Max);
+              }
+
+              if (std::abs(dPhi) > m_cfg.cutDPhiMax) {
+                // widen the acceptance by the chord-slope bound at d0Max
+                // (equivalent to requiring |d0Est| <= d0Max), computed only
+                // for candidates in the marginal band
+                bool reject = true;
+
+                if (lrt && dr23 > 1.0f) {
+                  const float a2 = std::asin(std::min(1.0f, m_cfg.d0Max / r2));
+                  const float a3 = std::asin(std::min(1.0f, m_cfg.d0Max / r3));
+                  const float c12 = (a2 - asinD0n1) / dr;
+                  const float c23 = (a3 - a2) / dr23;
+                  const float dPhiD0 = std::abs((c12 - c23) * r2);
+
+                  reject = std::abs(dPhi) > m_cfg.cutDPhiMax + dPhiD0;
+                }
+
+                if (reject) {
+                  ++cutStats.rejDPhi;
+                  ACTS_VERBOSE("rej dPhi: dPhi=" << dPhi << " r1=" << r1
+                                                 << " r2=" << r2);
+                  continue;
+                }
+              }
+
+              const float dcurv = curv2 - pS->p[1];
+
+              if (dcurv < -m_cfg.cutDCurvMax || dcurv > m_cfg.cutDCurvMax) {
+                ++cutStats.rejDCurv;
+                ACTS_VERBOSE("rej dCurv: dcurv=" << dcurv << " r1=" << r1
+                                                 << " r2=" << r2);
+                continue;
+              }
+
               const float absTauRatio = std::abs(pS->p[0] * uat2 - 1.0f);
               float addTauRatioCorr = 0;
 
@@ -637,73 +711,39 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
                 }
               }
 
-              if (lrt) {
-                // geometric tau variation between the two segments for a
-                // track with impact parameter up to d0Max: the inner segment
-                // always has the larger ds/dr chord factor
-                addTauRatioCorr += std::max(dsdrD0 / pS->dsdrD0 - 1.0f, 0.0f);
-              }
-
-              // bad match
+              // bad match; for LRT the acceptance is widened at the implied
+              // impact parameter of THIS triplet (not d0Max): the geometric
+              // ds/dr chord-factor bound plus the strip space-point z
+              // mis-measurement term, computed only in the marginal band
               if (absTauRatio > m_cfg.tauRatioCut + addTauRatioCorr) {
-                ++cutStats.rejTauRatio;
-                ACTS_VERBOSE("rej tauRatio: absTauRatio="
-                             << absTauRatio << " cut="
-                             << m_cfg.tauRatioCut + addTauRatioCorr
-                             << " r1=" << r1 << " r2=" << r2 << " lk3=" << lk3);
-                continue;
-              }
+                bool rejectTau = true;
 
-              float dPhi = phi2u - pS->p[2];
+                if (lrt && d0Eff > 0.0f && dr23 > 1.0f) {
+                  const float d0Eff2 = d0Eff * d0Eff;
+                  const float s1 = std::sqrt(std::max(r1 * r1 - d0Eff2, 0.0f));
+                  const float s2 = std::sqrt(std::max(r2 * r2 - d0Eff2, 0.0f));
+                  const float s3 = std::sqrt(std::max(r3 * r3 - d0Eff2, 0.0f));
+                  const float k12 = std::max((s2 - s1) / dr, 1e-3f);
+                  const float k23 = std::max((s3 - s2) / dr23, 1e-3f);
 
-              if (dPhi < -std::numbers::pi_v<float>) {
-                dPhi += 2 * std::numbers::pi_v<float>;
-              } else if (dPhi > std::numbers::pi_v<float>) {
-                dPhi -= 2 * std::numbers::pi_v<float>;
-              }
+                  const float widen =
+                      std::max(k12 / k23 - 1.0f, 0.0f) +
+                      m_cfg.tauRatioZBiasCoeff * d0Eff *
+                          (1.0f / dr + 1.0f / dr23) / fastHypot(1.0f, tau);
 
-              if (std::abs(dPhi) > m_cfg.cutDPhiMax) {
-                // displaced tracks: both direction estimates anchor at the
-                // shared node, so their difference for a track with impact
-                // parameter d0 is (c12 - c23) * r2 with
-                // c_ab = (asin(d0/r_b) - asin(d0/r_a)) / (r_b - r_a), the
-                // position-azimuth chord slope of each segment. Widen the
-                // acceptance by that bound evaluated at d0Max, computed only
-                // for candidates in the marginal band.
-                bool reject = true;
-
-                if (lrt) {
-                  const float r3 = pS->n2->r;
-                  const float dr23 = r3 - r2;
-
-                  if (dr23 > 1.0f) {
-                    const float a2 =
-                        std::asin(std::min(1.0f, m_cfg.d0Max / r2));
-                    const float a3 =
-                        std::asin(std::min(1.0f, m_cfg.d0Max / r3));
-                    const float c12 = (a2 - asinD0n1) / dr;
-                    const float c23 = (a3 - a2) / dr23;
-                    const float dPhiD0 = std::abs((c12 - c23) * r2);
-
-                    reject = std::abs(dPhi) > m_cfg.cutDPhiMax + dPhiD0;
-                  }
+                  rejectTau = absTauRatio >
+                              m_cfg.tauRatioCut + addTauRatioCorr + widen;
                 }
 
-                if (reject) {
-                  ++cutStats.rejDPhi;
-                  ACTS_VERBOSE("rej dPhi: dPhi=" << dPhi << " r1=" << r1
-                                                 << " r2=" << r2);
+                if (rejectTau) {
+                  ++cutStats.rejTauRatio;
+                  ACTS_VERBOSE("rej tauRatio: absTauRatio="
+                               << absTauRatio << " cut="
+                               << m_cfg.tauRatioCut + addTauRatioCorr
+                               << " d0Eff=" << d0Eff << " r1=" << r1
+                               << " r2=" << r2 << " lk3=" << lk3);
                   continue;
                 }
-              }
-
-              const float dcurv = curv2 - pS->p[1];
-
-              if (dcurv < -m_cfg.cutDCurvMax || dcurv > m_cfg.cutDCurvMax) {
-                ++cutStats.rejDCurv;
-                ACTS_VERBOSE("rej dCurv: dcurv=" << dcurv << " r1=" << r1
-                                                 << " r2=" << r2);
-                continue;
               }
 
               // final check: cuts on pT and d0
