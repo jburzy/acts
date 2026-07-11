@@ -105,7 +105,9 @@ void GraphBasedTrackSeeder::createSeeds(
     const float maxBaseWindow =
         0.015f + 2.2e-4f * ptScale * m_cfg.maxOuterRadius;
     const float rMin = std::max(nodeStorage.minNodeRadius(), 1.0f);
-    const float maxD0Window = std::asin(std::min(1.0f, m_cfg.d0Max / rMin));
+    const float maxD0Window = std::min(
+        m_cfg.maxPhiWindowD0,
+        std::asin(std::min(1.0f, m_cfg.d0Max / rMin)));
     phiIndexingRange =
         std::max(phiIndexingRange, std::min(std::numbers::pi_v<float> - 0.01f,
                                             maxBaseWindow + maxD0Window));
@@ -360,7 +362,9 @@ std::pair<std::int32_t, std::int32_t> GraphBasedTrackSeeder::buildTheGraph(
             std::min(1.0f, m_cfg.d0Max / std::max(rb1, 1.0f));
         const float sinOuter =
             std::min(1.0f, m_cfg.d0Max / std::max(rb2, 1.0f));
-        deltaPhi += std::max(0.0f, std::asin(sinInner) - std::asin(sinOuter));
+        deltaPhi += std::min(
+            m_cfg.maxPhiWindowD0,
+            std::max(0.0f, std::asin(sinInner) - std::asin(sinOuter)));
       }
 
       phiSlidingWindow[winIdx].bin = &B2;

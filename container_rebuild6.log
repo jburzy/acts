@@ -1,0 +1,1028 @@
+Info: /cvmfs mounted; do 'setupATLAS -d -c ...' to skip default mounts.
+Info: $HOME mounted; do 'setupATLAS -d -c ...' to skip default mounts.
+------------------------------------------------------------------------------
+Apptainer: 1.4.4
+Host: Linux, Rocky Linux 9.8 (Blue Onyx), x86_64, 5.14.0-687.17.1.el9_8.x86_64
+From: /cvmfs/atlas.cern.ch/repo/containers/sw/apptainer/x86_64-el8/1.4.4/bin/apptainer
+ContainerType: atlas-default
+apptainer  exec  -e   -B /home/jburzyns/.alrb/container/apptainer/home.zrCBDA/patchDir/50-redhat.conf:/etc/ssh/ssh_config.d/50-redhat.conf -B /home/jburzyns/.alrb/container/apptainer/home.zrCBDA/patchDir/openssh.config:/etc/crypto-policies/back-ends/openssh.config -H /home/jburzyns/.alrb/container/apptainer/home.zrCBDA:/alrb -B /cvmfs:/cvmfs -B /home:/home -B /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT:/srv /cvmfs/atlas.cern.ch/repo/containers/fs/singularity/x86_64-almalinux9 /alrb/.bashrc
+------------------------------------------------------------------------------
+[7mlsetup              [0m lsetup <tool1> [ <tool2> ...] (see lsetup -h):
+[7m lsetup asetup      [0m  (or asetup) to setup an Athena release
+[7m lsetup astyle      [0m  ATLAS style macros
+[7m lsetup atlantis    [0m  Atlantis: event display
+[7m lsetup centralpage [0m  Find samples
+[7m lsetup eiclient    [0m  Event Index 
+[7m lsetup emi         [0m  EMI: grid middleware user interface 
+[7m lsetup lcgenv      [0m  lcgenv: setup tools from cvmfs SFT repository
+[7m lsetup panda       [0m  Panda: Production ANd Distributed Analysis
+[7m lsetup pyami       [0m  pyAMI: ATLAS Metadata Interface python client
+[7m lsetup root        [0m  ROOT data processing framework
+[7m lsetup rucio       [0m  distributed data management system client
+[7m lsetup scikit      [0m  python data analysis ecosystem
+[7m lsetup views       [0m  Set up a full LCG release
+[7m lsetup xcache      [0m  XRootD local proxy cache
+[7m lsetup xrootd      [0m  XRootD data access
+[7madvancedTools       [0m advanced tools menu
+[7mdiagnostics         [0m diagnostic tools menu
+[7mhelpMe              [0m more help
+[7minstallPip          [0m install relocatable pip modules locally
+[7minstallRpm          [0m install relocatable rpms locally
+[7mprintMenu           [0m show this menu
+[7mqueryC              [0m find / whatis container query
+[7mshowVersions        [0m show versions of installed software
+
+Using Athena/25.0.68 [cmake] with platform x86_64-el9-gcc14-opt
+	at /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100
+Unchanged: COOL_ORA_ENABLE_ADAPTIVE_OPT=Y
+-- Using ACTS from: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts
+-- Setting up LCG release "LCG_109a_ATLAS_11" for platform: x86_64-el9-gcc14-opt
+-- C++ standard: 20
+-- Using compiler flags: -Wall -Wextra -Wpedantic -Wshadow -Wzero-as-null-pointer-constant -Wold-style-cast -Woverloaded-virtual  -fplugin=/cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/lib/libchecker_gccplugins.so -fplugin-arg-libchecker_gccplugins-config=/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/athena/Control/CxxUtils/share/checkergcc-base.config:/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/athena/Control/CxxUtils/share/checkergcc.config
+-- Checking C++20 std::format support
+-- Checking C++20 std::format support - ok
+-- Found Boost: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/Boost/1.90.0/x86_64-el9-gcc14-opt/lib/cmake/Boost-1.90.0 (found suitable version "1.90.0", minimum required is "1.78.0")
+-- Found Eigen3 at: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/eigen/3.4.1/x86_64-el9-gcc14-opt/include/eigen3 (3.4.1)
+-- Found nlohmann_json: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/jsonmcpp/3.12.0/x86_64-el9-gcc14-opt/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable version "3.12.0", minimum required is "3.11.3")
+-- Found GeoModelCore: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/lib/cmake/GeoModelCore (found version "6.29.0")
+-- Found GeoModelCore: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/lib/cmake/GeoModelCore (found suitable exact version "6.29.0")
+-- Enable component 'Core' in 'Core'
+-- Configuring codegen
+-- Codegen temporary directory: /tmp/tmp.TMk7HqImsh
+-- Found uv uv 0.7.19: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/uv/uv-x86_64-unknown-linux-musl/uv
+-- Enable component 'Fatras' in 'Fatras'
+-- Ignore component 'FatrasGeant4' in 'Fatras/Geant4'
+-- Ignore component 'Alignment' in 'Alignment'
+-- Ignore component 'PluginActSVG' in 'Plugins/ActSVG'
+-- Ignore component 'PluginFpeMonitoring' in 'Plugins/FpeMonitoring'
+-- Ignore component 'PluginGeant4' in 'Plugins/Geant4'
+-- Enable component 'PluginGeoModel' in 'Plugins/GeoModel'
+-- Enable component 'PluginJson' in 'Plugins/Json'
+-- Ignore component 'PluginMille' in 'Plugins/Mille'
+-- Ignore component 'PluginOnnx' in 'Plugins/Onnx'
+-- Ignore component 'PluginGnn' in 'Plugins/Gnn'
+-- Ignore component 'PluginDetray' in 'Plugins/Detray'
+-- Ignore component 'PluginCovfie' in 'Plugins/Covfie'
+-- Enable component 'PluginRoot' in 'Plugins/Root'
+-- Ignore component 'PluginDD4hep' in 'Plugins/DD4hep'
+-- Ignore component 'PluginEDM4hep' in 'Plugins/EDM4hep'
+-- Ignore component 'PluginArrow' in 'Plugins/Arrow'
+-- Ignore subdirectory 'thirdparty/OpenDataDetector'
+-- Ignore subdirectory 'Examples'
+-- Ignore subdirectory 'Python'
+-- Found nlohmann_json: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/jsonmcpp/3.12.0/x86_64-el9-gcc14-opt/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found version "3.12.0")
+-- Found Boost: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/Boost/1.90.0/x86_64-el9-gcc14-opt/lib/cmake/Boost-1.90.0 (found version "1.90.0")
+-- Setting up the tdaq-common externals...
+-- Setting ATLAS specific build flags
+-- Found checker_gccplugins library under: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/lib/libchecker_gccplugins.so
+-- Enabling Python code checker: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/bin/flake8_atlas
+-- Setting up LCG release "LCG_109a_ATLAS_11" for platform: x86_64-el9-gcc14-opt
+-- Found ROOT: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/LCG_109a_ATLAS_11/ROOT/6.38.04/x86_64-el9-gcc14-opt/cmake (found version 6.38.04)
+-- Found Gaudi: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/lib/cmake/Gaudi (found version 40.4)
+-- Checking C/C++ files with: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/Athena/25.0.68/InstallArea/x86_64-el9-gcc14-opt/bin/cppcheck_atlas --enable=warning,portability,performance --quiet --inline-suppr --template=gcc --performance-valueflow-max-if-count=50 -D__CPPCHECK__ -DATOMIC_POINTER_LOCK_FREE=2 --library=boost --library=googletest --library=python --library=/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/athena/Control/CxxUtils/share/cppcheck_athena.cfg --suppressions-list=/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/athena/Control/CxxUtils/share/cppcheck_suppress.txt --suppress=*:/cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/sw/lcg/releases/* --suppress=*:/cvmfs/atlas.cern.ch/repo/sw/tdaq/tdaq-common/tdaq-common-13-00-00/installed/include/* --suppress=*:/cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/include/*
+-- Configuring ATLAS project with name "WorkDir" and version "25.0.68"
+-- Using build type: RelWithDebInfo
+-- Using platform name: x86_64-el9-gcc14-opt
+-- Cleaning stale files from build area
+-- Unit tests will be built by default
+-- Found 72 package(s)
+-- Considering package 1 / 72
+-- No package filtering rules read
+-- Configuring the build of package: CITest
+-- Enabling CI tests for project Athena
+-- Configuring the build of package: CxxUtils
+-- Up-to-date: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/share/ubsan.supp
+-- Configuring the build of package: DumpEventDataToJSON
+-- Configuring the build of package: xAODAuxiliaryMeasurement
+-- Configuring the build of package: xAODInDetMeasurement
+-- Configuring the build of package: xAODInDetMeasurementAthenaPool
+-- Configuring the build of package: xAODMeasurementBase
+-- Configuring the build of package: xAODTracking
+-- Configuring the build of package: HGTD_Config
+-- Configuring the build of package: HGTD_RecAlgs
+-- Considering package 11 / 72
+-- Configuring the build of package: InDetConfig
+-- Configuring the build of package: InDetPriVxFinder
+-- Configuring the build of package: InDetRecToolInterfaces
+-- Configuring the build of package: InDetDefectsEmulation
+-- Configuring the build of package: InDetPhysValMonitoring
+-- Configuring the build of package: MdtCalibInterfaces
+-- Configuring the build of package: NSWCalibTools
+-- Configuring the build of package: MuonMDT_CnvTools
+-- Configuring the build of package: MuonMM_CnvTools
+-- Configuring the build of package: MuonSTGC_CnvTools
+-- Considering package 21 / 72
+-- Configuring the build of package: MuonCondAlg
+-- Configuring the build of package: MuonPatternEvent
+-- Configuring the build of package: MuonSpacePoint
+-- Configuring the build of package: MuonTrackEvent
+-- Configuring the build of package: MuonTruthHelpers
+-- Configuring the build of package: xAODMuonPrepData
+-- Configuring the build of package: MuonGeometryCnv
+-- Found GeoModel: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/include/GeoModel
+-- Configuring the build of package: MuonGeoModelR4
+-- Found GeoModel: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/include/GeoModel
+-- Configuring the build of package: MuonGeoModelTestR4
+-- Configuring the build of package: MuonReadoutGeometryR4
+-- Found GeoModel: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/include/GeoModel
+-- Considering package 31 / 72
+-- Configuring the build of package: MuonPatternHelpers
+-- Configuring the build of package: MuonTruthAlgsR4
+-- Configuring the build of package: MuonRecToolInterfacesR4
+-- Configuring the build of package: MuonTrackFindingAlgs
+-- Configuring the build of package: MuonTrackFindingTools
+-- Configuring the build of package: MuonVisualizationHelpersR4
+-- Configuring the build of package: egammaAlgs
+-- Configuring the build of package: AtlasGeant4
+-- Configuring the build of package: ISF_FastCaloSimParametrization
+-- Configuring the build of package: WorkflowTestRunner
+-- Considering package 41 / 72
+-- Configuring the build of package: ActsAlignmentAlgs
+-- Configuring the build of package: ActsCalibBase
+-- Configuring the build of package: ActsCalibrators
+-- Configuring the build of package: ActsCollectionAlgs
+-- Configuring the build of package: ActsConfig
+-- Configuring the build of package: ActsDataPreparation
+-- Configuring the build of package: ActsEvent
+-- Configuring the build of package: ActsEventCnv
+-- Configuring the build of package: ActsGPUDataPreparation
+-- Configuring the build of package: ActsGPUEvent
+-- Considering package 51 / 72
+-- Configuring the build of package: ActsGPUEventCnv
+-- Configuring the build of package: ActsGPUInterfaces
+-- Configuring the build of package: ActsGeantFollowing
+-- Configuring the build of package: ActsGeoUtils
+-- Found GeoModel: /cvmfs/atlas-nightlies.cern.ch/repo/sw/main_Athena_x86_64-el9-gcc14-opt/2026-07-10T2100/AthenaExternals/25.0.68/InstallArea/x86_64-el9-gcc14-opt/include/GeoModel
+-- Configuring the build of package: ActsGeometry
+-- Configuring the build of package: ActsGeometryInterfaces
+-- Configuring the build of package: ActsInterop
+-- Configuring the build of package: ActsMaterial
+-- Configuring the build of package: ActsMonitoring
+-- Configuring the build of package: ActsObjectDecoration
+-- Considering package 61 / 72
+-- Configuring the build of package: ActsPatternRecognition
+-- Configuring the build of package: ActsPrdAssociation
+-- Configuring the build of package: ActsRegionsOfInterest
+-- Configuring the build of package: ActsToolInterfaces
+-- Configuring the build of package: ActsTrackReconstruction
+-- Configuring the build of package: ActsTruth
+-- Configuring the build of package: ActsVertexReconstruction
+-- Configuring the build of package: TrkConfig
+-- Configuring the build of package: TrkExAlgs
+-- Configuring the build of package: EFTrackingDataTransfer
+-- SYCL is not available, not building EFTrackingDataTransfer
+-- Considering package 71 / 72
+-- Configuring the build of package: TrigFastTrackFinder
+-- Configuring the build of package: VP1TrackSystems
+-- Number of packages configured: 72
+-- Time for package configuration: 10 second(s)
+-- Generated file: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/packages.txt
+-- Including the packages from project Athena - 25.0.68...
+-- Including the packages from project AthenaExternals - 25.0.68...
+-- Generated file: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/compilers.txt
+-- Setting up the 'doc' target using Doxygen
+-- Generated file: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/ReleaseData
+-- Generating external environment configuration
+-- Writing runtime environment to file: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/env_setup.sh
+-- 
+--             In order to test your updates, please don't forget to
+--             set up the environment with e.g.:
+--             --->   source x86_64-el9-gcc14-opt/setup.sh
+-- 
+-- Configuring done (37.8s)
+-- Generating done (22.3s)
+-- Build files have been written to: /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs
+BUILD-SCRIPT: cmake configure exit code 0
+[  0%] Built target CxxUtilsHeaderInstall
+[  6%] Built target CITestTestScriptInstall
+[  8%] Built target TrigFastTrackFinderTestScriptInstall
+[  8%] Built target xAODMeasurementBaseHeaderInstall
+[  8%] Built target xAODInDetMeasurementHeaderInstall
+[  8%] Built target xAODTrackingHeaderInstall
+[  9%] Built target InDetConfigTestScriptInstall
+[  9%] Built target InDetPhysValMonitoringTestScriptInstall
+[  9%] Built target InDetPhysValMonitoringHeaderInstall
+[  9%] Built target InDetRecToolInterfacesHeaderInstall
+[  9%] Built target ActsInteropHeaderInstall
+[  9%] Built target codegen_1fb06d98eae48c30a60b4c8acb7ebdbee0670524_Internal
+[  9%] Built target codegen_79ce5a7ad1c4f4193db110f5858c7c94f7bc3c10_Internal
+[  9%] Built target codegen_4febcacac24eb26d1d1d0e61b83dbc12bbdd79cd_Internal
+[  9%] Built target MuonPatternEventHeaderInstall
+[  9%] Built target codegen_4456db4833ffa91027fc4b960af806f0afc991b3_Internal
+[  9%] Built target MuonSpacePointHeaderInstall
+[  9%] Built target xAODMuonPrepDataHeaderInstall
+[  9%] Built target ActsGeoUtilsHeaderInstall
+[  9%] Built target MuonReadoutGeometryR4HeaderInstall
+[  9%] Built target xAODAuxiliaryMeasurementHeaderInstall
+[  9%] Built target ActsGeometryInterfacesHeaderInstall
+[  9%] Built target ActsCalibBaseHeaderInstall
+[  9%] Built target MuonTruthHelpersHeaderInstall
+[  9%] Built target MuonTrackEventHeaderInstall
+[  9%] Built target ActsCalibratorsHeaderInstall
+[  9%] Built target ActsEventHeaderInstall
+[  9%] Built target ActsGeometryHeaderInstall
+[  9%] Built target MuonGeoModelTestR4TestScriptInstall
+[ 10%] Built target egammaAlgsTestScriptInstall
+[ 10%] Built target ActsConfigTestScriptInstall
+[ 10%] Built target ActsDataPreparationTestScriptInstall
+[ 10%] Built target ActsGeometryTestScriptInstall
+[ 10%] Built target ActsEventCnvTestScriptInstall
+[ 10%] Built target ActsInteropTestScriptInstall
+[ 10%] Built target ActsUnitDictDictGen
+[ 10%] Built target ActsMaterialTestScriptInstall
+[ 12%] Built target TrkConfigTestScriptInstall
+[ 12%] Built target ISF_FastCaloSimParametrizationHeaderInstall
+[ 12%] Built target NSWCalibToolsHeaderInstall
+[ 12%] Built target xAODInDetMeasurementDictDictGen
+[ 12%] Built target xAODTrackingDictDictGen
+[ 12%] Built target ActsCalibBaseDictDictGen
+[ 12%] Built target xAODMuonPrepDataDictDictGen
+[ 13%] Built target xAODMeasurementBaseDictDictGen
+[ 13%] Built target ActsEventDictDictGen
+[ 13%] Built target ActsGeometryInterfacesDictDictGen
+[ 13%] Built target xAODAuxiliaryMeasurementDictDictGen
+[ 13%] Built target MdtCalibInterfacesHeaderInstall
+[ 13%] Built target MuonMDT_CnvToolsHeaderInstall
+[ 13%] Built target MuonMM_CnvToolsHeaderInstall
+[ 13%] Built target MuonSTGC_CnvToolsHeaderInstall
+[ 13%] Built target MuonRecToolInterfacesR4HeaderInstall
+[ 13%] Built target ActsToolInterfacesHeaderInstall
+[ 13%] Built target MuonGeoModelR4HeaderInstall
+[ 13%] Built target MuonVisualizationHelpersR4HeaderInstall
+[ 13%] Built target MuonPatternHelpersHeaderInstall
+[ 13%] Built target ActsTruthHeaderInstall
+[ 13%] Built target ActsVertexReconstructionHeaderInstall
+[ 13%] Built target CITestRuntimeInstall
+[ 13%] Built target MuonTrackFindingToolsHeaderInstall
+[ 13%] Built target exctrace_collector
+[ 13%] Built target excabort
+[ 13%] Built target CxxUtilsScriptsInstall
+[ 13%] Built target DumpEventDataToJSONPyCompile
+[ 13%] Built target DumpEventDataToJSONPythonInstall
+[ 13%] Built target xAODInDetMeasurementAthenaPoolJobOptGen
+[ 13%] Built target HGTD_ConfigPythonInstall
+[ 13%] Built target HGTD_ConfigPyCompile
+[ 17%] Built target InDetConfigPythonInstall
+[ 17%] Built target HGTD_RecAlgsRuntimeInstall
+[ 17%] Built target InDetConfigPyCompile
+[ 17%] Built target InDetPriVxFinderScriptsInstall
+[ 17%] Built target InDetPriVxFinderPythonInstall
+[ 17%] Built target InDetDefectsEmulationPythonInstall
+[ 17%] Built target Package_InDetRecToolInterfaces
+[ 17%] Built target InDetDefectsEmulationPyCompile
+[ 17%] Built target InDetPriVxFinderPyCompile
+[ 18%] Built target InDetPhysValMonitoringPythonInstall
+[ 18%] Built target InDetPhysValMonitoringPyCompile
+[ 20%] Built target InDetPhysValMonitoringRuntimeInstall
+[ 20%] Built target InDetPhysValMonitoringJobOptInstall
+[ 21%] Built target InDetPhysValMonitoringScriptsInstall
+[ 21%] Built target MuonCondAlgDataInstall
+[ 21%] Built target MuonGeometryCnvPythonInstall
+[ 21%] Built target MuonGeometryCnvPyCompile
+[ 21%] Built target MuonGeoModelR4PythonInstall
+[ 21%] Built target MuonGeoModelTestR4PyCompile
+[ 21%] Built target MuonGeoModelR4PyCompile
+[ 21%] Built target MuonGeoModelTestR4PythonInstall
+[ 21%] Built target MuonTruthAlgsR4PyCompile
+[ 21%] Built target MuonGeoModelTestR4ScriptsInstall
+[ 21%] Built target MuonTruthAlgsR4PythonInstall
+[ 21%] Built target Package_MuonRecToolInterfacesR4
+[ 21%] Built target MuonTrackFindingAlgsPythonInstall
+[ 21%] Built target MuonTrackFindingAlgsPyCompile
+[ 22%] Built target egammaAlgsPyCompile
+[ 22%] Built target egammaAlgsPythonInstall
+[ 22%] Built target AtlasGeant4GenericInstall
+[ 24%] Built target ISF_FastCaloSimParametrizationPythonInstall
+[ 25%] Built target WorkflowTestRunnerScriptsInstall
+[ 25%] Built target ISF_FastCaloSimParametrizationScriptsInstall
+[ 25%] Built target WorkflowTestRunnerPyCompile
+[ 25%] Built target WorkflowTestRunnerPythonInstall
+[ 25%] Built target ISF_FastCaloSimParametrizationPyCompile
+[ 25%] Built target ActsAlignmentAlgsPyCompile
+[ 25%] Running ActsConfigPythonInstall post-command
+[ 25%] Compiling python modules
+[ 25%] Built target ActsAlignmentAlgsPythonInstall
+[ 28%] Built target ActsConfigScriptsInstall
+[ 28%] Built target Package_ActsGPUDataPreparation
+[ 28%] Built target ActsConfigDataInstall
+[ 28%] Built target Package_ActsGPUEvent
+[ 28%] Built target Package_ActsGPUEventCnv
+[ 28%] Built target Package_ActsGPUInterfaces
+[ 28%] Built target ActsGeantFollowingJobOptInstall
+[ 28%] Built target ActsGeometryJobOptInstall
+[ 29%] Built target ActsGeometryScriptsInstall
+[ 29%] Built target ActsInteropPythonInstall
+[ 29%] Built target ActsMaterialScriptsInstall
+[ 29%] Built target ActsInteropPyCompile
+[ 29%] Built target ActsUnitDict
+[ 29%] Built target ActsMonitoringScriptsInstall
+[ 29%] Built target Package_ActsToolInterfaces
+[ 31%] Built target TrkConfigPythonInstall
+[ 31%] Built target TrkConfigPyCompile
+[ 31%] Built target Package_EFTrackingDataTransfer
+[ 31%] Built target TrkConfigDataInstall
+[ 31%] Built target TrigFastTrackFinderPythonInstall
+[ 31%] Built target TrigFastTrackFinderPyCompile
+[ 31%] Built target VP1TrackSystemsHeaderInstall
+[ 31%] Built target TrigFastTrackFinderScriptsInstall
+[ 31%] Built target TrigFastTrackFinderRuntimeInstall
+[ 31%] Built target Package_CITest_tests
+[ 31%] Built target Package_TrigFastTrackFinder_tests
+[ 31%] Built target Package_InDetConfig_tests
+[ 31%] Built target calg
+[ 31%] Built target Package_MuonGeoModelTestR4_tests
+[ 33%] Built target CxxUtils
+[ 33%] Built target Package_egammaAlgs_tests
+[ 33%] Built target Package_ActsConfig_tests
+[ 33%] Built target Package_ActsDataPreparation_tests
+[ 33%] Built target Package_ActsEventCnv_tests
+[ 33%] Built target Package_ActsGeometry_tests
+[ 33%] Built target Package_TrkConfig_tests
+[ 33%] Built target Package_ActsMaterial_tests
+[ 33%] Built target Package_HGTD_Config
+[ 33%] Built target Package_CITest
+[ 33%] Built target Package_WorkflowTestRunner
+[ 33%] Built target Package_InDetConfig
+[ 33%] Built target AthDSoCallBacks
+[ 33%] Built target CxxUtils_crc_combine_test
+[ 33%] Built target CxxUtils_read_athena_statm_test
+[ 33%] Built target CxxUtils_PageAccessControl_test
+[ 33%] Built target CxxUtils_SEGVHandler_test
+[ 33%] Built target CxxUtils_procmaps_test
+[ 33%] Built target CxxUtils_copy_bounded_test
+[ 33%] Built target CxxUtils_stacktrace_test
+[ 33%] Built target CxxUtils_BitPackerUnpacker_test
+[ 35%] Built target CxxUtils_MD5_test
+[ 36%] Built target CxxUtils_ConcurrentBitset_test
+[ 36%] Built target CxxUtils_Compressor_test
+[ 36%] Built target CxxUtils_ConcurrentStrMap_test
+[ 36%] Built target CxxUtils_HexString_test
+[ 36%] Built target CxxUtils_ConcurrentMap_test
+[ 36%] Built target CxxUtils_ConcurrentPtrSet_test
+[ 36%] Built target CxxUtils_exctrace2_test
+[ 36%] Built target CxxUtils_stringUtilsTest
+[ 36%] Built target CxxUtils_CachedValueTiming_test
+[ 36%] Built target CxxUtils_close_to_zero_test
+[ 36%] Built target CxxUtils_sincos_test
+[ 36%] Built target CxxUtils_Arrayrep_test
+[ 36%] Built target CxxUtils_ArrayScanner_test
+[ 36%] Built target CxxUtils_transparent_string_hash_test
+[ 36%] Built target CxxUtils_FloatCompressor_test
+[ 36%] Built target CxxUtils_Array_test
+[ 36%] Built target CxxUtils_PackedArray_test
+[ 36%] Built target CxxUtils_pointer_list_test
+[ 36%] Built target CxxUtils_FloatPacker_test
+[ 36%] Built target CxxUtils_fpcompare_test
+[ 36%] Built target ActsConfigPyCompile
+[ 36%] Built target CxxUtils_StrFormat_test
+[ 36%] Built target CxxUtils_prefetch_test
+[ 36%] Built target CxxUtils_phihelper_test
+[ 36%] Built target CxxUtils_ClassName_test
+[ 36%] Built target CxxUtils_ones_test
+[ 36%] Built target CxxUtils_exctrace1_test
+[ 36%] Built target CxxUtils_ConcurrentRangeMap_test
+[ 36%] Built target CxxUtils_CachedValue_test
+[ 36%] Built target CxxUtils_CachedPointer_test
+[ 36%] Built target CxxUtils_CachedUniquePtr_test
+[ 36%] Built target CxxUtils_atomic_fetch_minmax_test
+[ 36%] Building CXX object _deps/acts-build/Core/CMakeFiles/ActsCore.dir/src/Seeding2/GbtsDataStorage.cpp.o
+[ 36%] Building CXX object _deps/acts-build/Core/CMakeFiles/ActsCore.dir/src/Seeding2/GbtsTrackingFilter.cpp.o
+[ 36%] Building CXX object _deps/acts-build/Core/CMakeFiles/ActsCore.dir/src/Seeding2/GraphBasedTrackSeeder.cpp.o
+[ 36%] Built target CxxUtils_MurmurHash2_test
+[ 36%] Built target CxxUtils_bitmask_test
+[ 36%] Built target CxxUtils_Ring_test
+[ 36%] Built target CxxUtils_crc64_test
+[ 36%] Built target CxxUtils_restrict_test
+[ 36%] Built target CxxUtils_vectorize_test
+[ 36%] Built target CxxUtils_get_unaligned_test
+[ 36%] Built target CxxUtils_set_unaligned_test
+[ 36%] Built target CxxUtils_aligned_vector_test
+[ 36%] Built target CxxUtils_vec_float_test
+[ 36%] Built target CxxUtils_vec_fb_int_test
+[ 37%] Built target CxxUtils_vec_int_test
+[ 37%] Built target CxxUtils_ConcurrentStrToValMap_test
+[ 37%] Built target CxxUtils_ConcurrentHashmapImpl_test
+[ 37%] Built target CxxUtils_vec_fb_float_test
+[ 37%] Built target CxxUtils_SimpleUpdater_test
+[ 37%] Built target CxxUtils_ConcurrentToValMap_test
+[ 37%] Built target CxxUtils_hexdump_test
+[ 39%] Built target CxxUtils_atomic_bounded_decrement_test
+[ 39%] Built target CxxUtils_LockedPointer_test
+[ 39%] Built target CxxUtils_FPControl_test
+[ 39%] Built target CxxUtils_nodiscard_test
+[ 39%] Built target CxxUtils_span_test
+[ 39%] Built target CxxUtils_reverse_wrapper_test
+[ 40%] Built target CxxUtils_releasing_iterator_test
+[ 40%] Built target CxxUtils_UIntConv_test
+[ 40%] Built target CxxUtils_SizedUInt_test
+[ 40%] Built target CxxUtils_normalizeFunctionName_test
+[ 40%] Built target CxxUtils_StringParse_test
+[ 40%] Built target CxxUtils_pputils_test
+[ 40%] Built target CxxUtils_minmax_transformed_element_test
+[ 40%] Built target CxxUtils_range_with_conv_test
+[ 40%] Built target CxxUtils_xmalloc_test
+[ 40%] Built target CxxUtils_byteswap_test
+[ 40%] Built target CxxUtils_range_with_at_test
+[ 41%] Built target ActsConfigPythonInstall
+[ 41%] Built target CxxUtils_RefCountedPtr_test
+[ 43%] Built target CxxUtils_iterator_range_test
+[ 43%] Built target CxxUtils_throw_out_of_range_test
+[ 43%] Built target Package_TrkConfig
+[ 43%] Built target xAODMeasurementBase
+[ 43%] Built target InDetDefectsEmulation_EmulatedDefectsBuilder_test
+[ 43%] Built target Package_ActsConfig
+[ 43%] Built target Package_CxxUtils_tests
+[ 43%] Built target Package_InDetDefectsEmulation_tests
+[ 43%] Built target xAODMeasurementBaseDict
+[ 43%] Built target xAODInDetMeasurement
+[ 43%] Built target Package_CxxUtils
+[ 43%] Built target Package_xAODMeasurementBase
+[ 44%] Built target xAODTracking
+[ 44%] Built target ActsTrackReconstruction_NNHelpersTest
+[ 44%] Built target xAODInDetMeasurement_xAODInDetMeasurement_PixelCluster_test
+[ 44%] Built target xAODInDetMeasurement_xAODInDetMeasurement_HGTDCluster_test
+[ 44%] Built target xAODInDetMeasurement_xAODInDetMeasurement_StripCluster_test
+[ 44%] Built target xAODInDetMeasurement_xAODInDetMeasurement_SpacePoint_test
+[ 44%] Built target xAODInDetMeasurement_JaggedVecEltCache_test
+[ 44%] Built target xAODInDetMeasurementDict
+[ 45%] Built target xAODInDetMeasurementAthenaPoolPoolCnv
+[ 45%] Built target xAODTracking_xAODTracking_TrackParticle_test
+[ 45%] Built target xAODTracking_ut_xaodtracking_vertex
+[ 47%] Built target xAODTracking_xAODTracking_TrackParticlexAODHelpers_test
+[ 47%] Built target xAODTracking_MultiTrajectoryBackends_test
+[ 47%] Built target Package_xAODInDetMeasurement_tests
+[ 47%] Built target xAODTrackingDict
+[ 47%] Built target xAODInDetMeasurementAthenaPoolPoolCnvComponentsList
+[ 47%] Built target InDetPriVxFinder
+[ 47%] Built target TrigFastTrackFinder
+[ 47%] Built target ISF_FastCaloSimParametrizationLib
+[ 47%] Built target Package_xAODTracking_tests
+[ 47%] Built target Package_xAODInDetMeasurement
+[ 47%] Built target Package_xAODInDetMeasurementAthenaPool
+[ 47%] Built target InDetPriVxFinderClidGen
+[ 47%] Built target InDetPriVxFinderComponentsList
+[ 47%] Built target InDetPriVxFinderConfigurables
+[ 47%] Built target TrigFastTrackFinderClidGen
+[ 47%] Built target TrigFastTrackFinderComponentsList
+[ 47%] Built target TrigFastTrackFinderConfigurables
+[ 47%] Built /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/lib/WorkDir.rootmap
+[ 48%] Built target InDetPhysValMonitoringLib
+[ 48%] Built target Package_xAODTracking
+[ 48%] Built target ISF_FastCaloSimParametrization
+[ 48%] Built target Package_InDetPriVxFinder
+[ 48%] Built target Package_TrigFastTrackFinder
+[ 48%] Built target InDetPhysValMonitoring_SingleHistogramDefinition_test
+[ 48%] Built target postProcessIDPVMHistos
+[ 48%] Built target InDetPhysValMonitoring_HistogramDefinitionSvc_test
+[ 48%] Built target InDetPhysValMonitoring_XmlEntityInclusion_test
+[ 48%] Built target InDetPhysValMonitoring_InDetPlotBase_test
+[ 50%] Built target InDetPhysValMonitoring
+[ 50%] Built target Package_ISF_FastCaloSimParametrization
+[ 50%] Built target Package_InDetPhysValMonitoring_tests
+[ 50%] Built target InDetPhysValMonitoringClidGen
+[ 50%] Built target InDetPhysValMonitoringComponentsList
+[ 50%] Built target InDetPhysValMonitoringConfigurables
+[ 50%] Built target WorkDirRootMapMerge
+[ 50%] Built target Package_InDetPhysValMonitoring
+In file included from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/EventData/SpacePointColumnProxy2.hpp:13,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/EventData/SpacePointContainer2.hpp:12,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/EventData/SeedContainer2.hpp:12,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Seeding2/GraphBasedTrackSeeder.hpp:12,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/src/Seeding2/GraphBasedTrackSeeder.cpp:9:
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/detail/ContainerSubset.hpp:54:27: warning: ATLAS coding standards require that the name of private static member 'Acts::detail::ContainerSubset<derived_t, derived_read_only_t, container_t, value_t, index_range_t, read_only>::Iterator<subset_iterator_t>::IsBidirectional' start with 'm_' or 's_'.
+   54 |     static constexpr bool IsBidirectional =
+      |                           ^~~~~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/detail/ContainerSubset.hpp:54:27: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/detail/ContainerSubset.hpp:56:27: warning: ATLAS coding standards require that the name of private static member 'Acts::detail::ContainerSubset<derived_t, derived_read_only_t, container_t, value_t, index_range_t, read_only>::Iterator<subset_iterator_t>::IsRandomAccess' start with 'm_' or 's_'.
+   56 |     static constexpr bool IsRandomAccess =
+      |                           ^~~~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/detail/ContainerSubset.hpp:56:27: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+In file included from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Seeding2/GraphBasedTrackSeeder.hpp:18:
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp: In member function 'std::unique_ptr<Acts::Logger> Acts::Logger::clone(const std::optional<std::__cxx11::basic_string<char> >&, const std::optional<Acts::Logging::Level>&) const':
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:750:41: warning: ATLAS coding standards require that the name of function parameter '_name' not start with '_'.
+  750 |       const std::optional<std::string>& _name = std::nullopt,
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:750:41: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:751:44: warning: ATLAS coding standards require that the name of function parameter '_level' not start with '_'.
+  751 |       const std::optional<Logging::Level>& _level = std::nullopt) const {
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:751:44: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp: In member function 'std::unique_ptr<Acts::Logger> Acts::Logger::clone(Acts::Logging::Level) const':
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:761:48: warning: ATLAS coding standards require that the name of function parameter '_level' not start with '_'.
+  761 |   std::unique_ptr<Logger> clone(Logging::Level _level) const {
+      |                                 ~~~~~~~~~~~~~~~^~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:761:48: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp: In member function 'std::unique_ptr<Acts::Logger> Acts::Logger::cloneWithSuffix(const std::string&, std::optional<Acts::Logging::Level>) const':
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:772:37: warning: ATLAS coding standards require that the name of function parameter '_level' not start with '_'.
+  772 |       std::optional<Logging::Level> _level = std::nullopt) const {
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:772:37: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#naming_plugin>.
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp: In member function 'virtual std::unique_ptr<Acts::Logging::OutputPrintPolicy> Acts::Logging::DefaultPrintPolicy::clone(const std::string&) const':
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:678:48: warning: Argument from member 'Acts::Logging::DefaultPrintPolicy::m_out' of type 'std::ostream* {aka std::basic_ostream<char>*}' in const member function passed to non-const pointer argument of function 'std::__detail::__unique_ptr_t<_Tp> std::make_unique(_Args&& ...) [with _Tp = Acts::Logging::DefaultPrintPolicy; _Args = {basic_ostream<char, char_traits<char> >* const&}]'; may not be thread-safe
+  678 |     return std::make_unique<DefaultPrintPolicy>(m_out);
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+In file included from /cvmfs/sft.cern.ch/lcg/releases/gcc/14.3.0-c8dfb/x86_64-el9/include/c++/14.3.0/memory:78,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Delegate.hpp:15,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/EventData/SourceLink.hpp:13,
+                 from /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/EventData/SpacePointContainer2.hpp:11:
+/cvmfs/sft.cern.ch/lcg/releases/gcc/14.3.0-c8dfb/x86_64-el9/include/c++/14.3.0/bits/unique_ptr.h:1076:5: note: Called function declared here:
+ 1076 |     make_unique(_Args&&... __args)
+      |     ^~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:678:48: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#thread_plugin>.
+  678 |     return std::make_unique<DefaultPrintPolicy>(m_out);
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp: In member function 'void Acts::Logger::log(const Acts::Logging::Level&, const std::string&) const':
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:721:27: warning: Function 'void Acts::Logger::log(const Acts::Logging::Level&, const std::string&) const' calling non-const function 'virtual void Acts::Logging::OutputPrintPolicy::flush(const Acts::Logging::Level&, const std::string&)' via member pointer/reference 'Acts::Logger::m_printPolicy' of type 'std::unique_ptr<Acts::Logging::OutputPrintPolicy>'; may not be thread-safe
+  721 |       m_printPolicy->flush(lvl, input);
+      |       ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/acts/Core/include/Acts/Utilities/Logger.hpp:721:27: note: See <https://gitlab.cern.ch/atlas/atlasexternals/tree/master/External/CheckerGccPlugins#thread_plugin>.
+[ 50%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsCore.so
+[ 63%] Built target ActsCore
+[ 63%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsInteropLib.so
+[ 63%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsFatras.so
+[ 63%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libActsPluginRoot.so
+[ 63%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libActsPluginJson.so
+[ 63%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libActsPluginGeoModel.so
+[ 63%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libdocs-geometry-module-template.so
+[ 63%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libActsCalibBaseDict.so
+[ 63%] Built target docs-geometry-module-template
+[ 63%] Built target ActsFatras
+[ 64%] Built target ActsPluginRoot
+Detaching debug info of libActsInteropLib.so into libActsInteropLib.so.dbg
+[ 64%] Built target ActsPluginGeoModel
+Detaching debug info of libActsCalibBaseDict.so into libActsCalibBaseDict.so.dbg
+[ 64%] Built target ActsInteropLib
+[ 64%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsGeometryInterfacesLib.so
+[ 64%] Linking CXX executable test-bin/TableUtils_test.exe
+[ 64%] Linking CXX executable test-bin/ActsLogger.exe
+[ 64%] Built target ActsCalibBaseDict
+[ 66%] Built target ActsPluginJson
+[ 66%] Built target Package_ActsCalibBase
+Detaching debug info of libActsGeometryInterfacesLib.so into libActsGeometryInterfacesLib.so.dbg
+[ 66%] Built target ActsInterop_TableUtils_test
+[ 66%] Built target ActsInterop_ActsLogger
+[ 66%] Built target ActsGeometryInterfacesLib
+[ 66%] Built target Package_ActsInterop_tests
+[ 66%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsGeometryInterfacesDict.so
+[ 66%] Linking CXX executable ../../../x86_64-el9-gcc14-opt/bin/runActsGeoComparison
+[ 66%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsGeoUtils.so
+[ 66%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsAlignmentAlgs.so
+[ 66%] Built target Package_ActsInterop
+Detaching debug info of libActsGeometryInterfacesDict.so into libActsGeometryInterfacesDict.so.dbg
+[ 66%] Built target ActsGeometryInterfacesDict
+Detaching debug info of libActsAlignmentAlgs.so into libActsAlignmentAlgs.so.dbg
+Detaching debug info of runActsGeoComparison into runActsGeoComparison.dbg
+[ 66%] Built target Package_ActsGeometryInterfaces
+Detaching debug info of libActsGeoUtils.so into libActsGeoUtils.so.dbg
+[ 66%] Built target runActsGeoComparison
+[ 66%] Built target ActsAlignmentAlgs
+[ 66%] Built target ActsGeoUtils
+[ 66%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsAlignmentAlgs/ActsAlignmentAlgsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsAlignmentAlgs.confdb, genConf/ActsAlignmentAlgs.confdb2_part
+[ 66%] Generating ActsAlignmentAlgs_clid.db
+[ 66%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsAlignmentAlgs.components
+[ 66%] Linking CXX executable test-bin/test_TicketAlignStore.exe
+[ 66%] Linking CXX executable test-bin/test_AlignStoreAccess.exe
+[ 66%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libxAODAuxiliaryMeasurement.so
+[ 66%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsGeometryLib.so
+[ 66%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonReadoutGeometryR4.so
+[ 66%] Built target ActsAlignmentAlgsComponentsList
+[ 66%] Built target ActsGeoUtils_test_TicketAlignStore
+Detaching debug info of libxAODAuxiliaryMeasurement.so into libxAODAuxiliaryMeasurement.so.dbg
+[ 66%] Built target ActsGeoUtils_test_AlignStoreAccess
+[ 66%] Built target Package_ActsGeoUtils_tests
+[ 66%] Built target ActsAlignmentAlgsClidGen
+[ 66%] Built target Package_ActsGeoUtils
+[ 66%] Built target ActsAlignmentAlgsConfigurables
+[ 66%] Built target Package_ActsAlignmentAlgs
+[ 66%] Built target xAODAuxiliaryMeasurement
+[ 66%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libxAODAuxiliaryMeasurementDict.so
+Detaching debug info of libActsGeometryLib.so into libActsGeometryLib.so.dbg
+Detaching debug info of libMuonReadoutGeometryR4.so into libMuonReadoutGeometryR4.so.dbg
+Detaching debug info of libxAODAuxiliaryMeasurementDict.so into libxAODAuxiliaryMeasurementDict.so.dbg
+[ 67%] Built target xAODAuxiliaryMeasurementDict
+[ 67%] Built target Package_xAODAuxiliaryMeasurement
+[ 67%] Built target ActsGeometryLib
+[ 67%] Built target ActsGeantFollowing
+[ 68%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsVertexReconstructionLib.so
+[ 68%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libInDetDefectsEmulation.so
+[ 68%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsEventLib.so
+[ 68%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libTrkExAlgs.so
+[ 68%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsGeometry.so
+[ 68%] Built target Package_ActsGeantFollowing
+[ 70%] Built target MuonReadoutGeometryR4
+[ 70%] Built target Package_MuonReadoutGeometryR4
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runMmGeoComparison
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runsTgcGeoComparison
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runStripDesignDump
+[ 70%] Linking CXX shared library ../../x86_64-el9-gcc14-opt/lib/libAtlasGeant4Lib.so
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runTgcGeoComparison
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runMdtGeoComparison
+[ 70%] Linking CXX executable ../../../../x86_64-el9-gcc14-opt/bin/runRpcGeoComparison
+[ 70%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeometryCnv.so
+[ 70%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelR4.so
+[ 70%] Linking CXX shared library ../../../../../x86_64-el9-gcc14-opt/lib/libxAODMuonPrepData.so
+Detaching debug info of libActsEventLib.so into libActsEventLib.so.dbg
+Detaching debug info of libActsVertexReconstructionLib.so into libActsVertexReconstructionLib.so.dbg
+Detaching debug info of libInDetDefectsEmulation.so into libInDetDefectsEmulation.so.dbg
+Detaching debug info of libActsGeometry.so into libActsGeometry.so.dbg
+Detaching debug info of libTrkExAlgs.so into libTrkExAlgs.so.dbg
+Detaching debug info of runStripDesignDump into runStripDesignDump.dbg
+Detaching debug info of runsTgcGeoComparison into runsTgcGeoComparison.dbg
+Detaching debug info of runMmGeoComparison into runMmGeoComparison.dbg
+Detaching debug info of runRpcGeoComparison into runRpcGeoComparison.dbg
+Detaching debug info of runMdtGeoComparison into runMdtGeoComparison.dbg
+Detaching debug info of runTgcGeoComparison into runTgcGeoComparison.dbg
+Detaching debug info of libMuonGeometryCnv.so into libMuonGeometryCnv.so.dbg
+[ 70%] Built target ActsEventLib
+[ 70%] Built target ActsVertexReconstructionLib
+[ 70%] Built target runStripDesignDump
+[ 70%] Built target runRpcGeoComparison
+[ 70%] Built target runMdtGeoComparison
+[ 70%] Built target runMmGeoComparison
+[ 70%] Built target runsTgcGeoComparison
+[ 70%] Linking CXX executable test-bin/MultiTrajectoryBasic_test.exe
+[ 70%] Linking CXX executable test-bin/TrackSummaryContainer_test.exe
+[ 70%] Built target runTgcGeoComparison
+[ 70%] Linking CXX executable test-bin/MultiTrajectorySE_test.exe
+[ 71%] Linking CXX executable test-bin/MultiTrajectoryACTS_test.exe
+[ 71%] Linking CXX shared module ../../x86_64-el9-gcc14-opt/lib/libDumpEventDataToJSON.so
+[ 71%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsCollectionAlgs.so
+[ 72%] Built target ActsMaterial
+[ 72%] Building CXX object Tracking/Acts/ActsPatternRecognition/CMakeFiles/ActsPatternRecognition.dir/src/GbtsSeedingTool.cxx.o
+[ 72%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libegammaAlgs.so
+[ 72%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsRegionsOfInterest.so
+Detaching debug info of libMuonGeoModelR4.so into libMuonGeoModelR4.so.dbg
+[ 72%] Built target InDetDefectsEmulation
+[ 74%] Built target MuonGeometryCnv
+[ 74%] Building CXX object Tracking/Acts/ActsPatternRecognition/CMakeFiles/ActsPatternRecognition.dir/src/components/ActsPatternRecognition_entries.cxx.o
+[ 74%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsVertexReconstruction.so
+[ 74%] Built target TrkExAlgs
+Detaching debug info of libxAODMuonPrepData.so into libxAODMuonPrepData.so.dbg
+[ 74%] Generating ../../../x86_64-el9-gcc14-opt/lib/libInDetDefectsEmulation.components
+[ 74%] Built target ActsEvent_TrackSummaryContainer_test
+[ 74%] Built target ActsEvent_MultiTrajectoryBasic_test
+Detaching debug info of libActsCollectionAlgs.so into libActsCollectionAlgs.so.dbg
+[ 74%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeometryCnv.components
+Detaching debug info of libActsRegionsOfInterest.so into libActsRegionsOfInterest.so.dbg
+[ 74%] Generating ../../../x86_64-el9-gcc14-opt/lib/libTrkExAlgs.components
+[ 74%] Built target ActsEvent_MultiTrajectorySE_test
+[ 74%] Built target ActsEvent_MultiTrajectoryACTS_test
+[ 74%] Generating ../../../x86_64-el9-gcc14-opt/python/InDetDefectsEmulation/InDetDefectsEmulationConf.py, ../../../x86_64-el9-gcc14-opt/lib/libInDetDefectsEmulation.confdb, genConf/InDetDefectsEmulation.confdb2_part
+[ 74%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonGeometryCnv/MuonGeometryCnvConf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeometryCnv.confdb, genConf/MuonGeometryCnv.confdb2_part
+[ 75%] Built target ActsGeometry
+[ 75%] Generating ../../../x86_64-el9-gcc14-opt/python/TrkExAlgs/TrkExAlgsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libTrkExAlgs.confdb, genConf/TrkExAlgs.confdb2_part
+Detaching debug info of libDumpEventDataToJSON.so into libDumpEventDataToJSON.so.dbg
+[ 75%] Built target ActsRegionsOfInterest
+[ 75%] Built target InDetDefectsEmulationComponentsList
+[ 75%] Linking CXX shared library ../../../x86_64-el9-gcc14-opt/lib/libActsEventDict.so
+[ 77%] Built target ActsCollectionAlgs
+[ 77%] Built target Package_ActsMaterial
+[ 77%] Built target TrkExAlgsComponentsList
+[ 77%] Built target MuonGeometryCnvComponentsList
+[ 77%] Built target Package_ActsEvent_tests
+[ 77%] Generating InDetDefectsEmulation_clid.db
+[ 77%] Generating MuonGeometryCnv_clid.db
+[ 77%] Linking CXX shared module ../../x86_64-el9-gcc14-opt/lib/libAtlasGeant4.so
+[ 77%] Generating ActsCollectionAlgs_clid.db
+Detaching debug info of libActsVertexReconstruction.so into libActsVertexReconstruction.so.dbg
+[ 77%] Built target MuonGeoModelR4
+[ 77%] Built target DumpEventDataToJSON
+[ 77%] Generating ActsGeometry_clid.db
+[ 77%] Generating ActsRegionsOfInterest_clid.db
+[ 77%] Built target MuonGeometryCnvConfigurables
+[ 77%] Built target InDetDefectsEmulationConfigurables
+Detaching debug info of libActsEventDict.so into libActsEventDict.so.dbg
+[ 77%] Built target TrkExAlgsConfigurables
+[ 77%] Generating TrkExAlgs_clid.db
+[ 77%] Generating ../../x86_64-el9-gcc14-opt/lib/libDumpEventDataToJSON.components
+[ 77%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelR4.components
+[ 77%] Built target ActsEventDict
+[ 77%] Built target InDetDefectsEmulationClidGen
+[ 77%] Built target MuonGeometryCnvClidGen
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsCollectionAlgs.components
+[ 77%] Built target ActsCollectionAlgsClidGen
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsGeometry.components
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsRegionsOfInterest.components
+[ 77%] Generating ../../x86_64-el9-gcc14-opt/python/DumpEventDataToJSON/DumpEventDataToJSONConf.py, ../../x86_64-el9-gcc14-opt/lib/libDumpEventDataToJSON.confdb, genConf/DumpEventDataToJSON.confdb2_part
+Detaching debug info of libegammaAlgs.so into libegammaAlgs.so.dbg
+[ 77%] Built target MuonGeoModelR4ComponentsList
+[ 77%] Built target DumpEventDataToJSONComponentsList
+[ 77%] Built target ActsGeometryClidGen
+[ 77%] Built target ActsVertexReconstruction
+[ 77%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonGeoModelR4/MuonGeoModelR4Conf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelR4.confdb, genConf/MuonGeoModelR4.confdb2_part
+[ 77%] Built target xAODMuonPrepData
+[ 77%] Built target ActsRegionsOfInterestClidGen
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsGeometry/ActsGeometryConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsGeometry.confdb, genConf/ActsGeometry.confdb2_part
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsCollectionAlgs/ActsCollectionAlgsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsCollectionAlgs.confdb, genConf/ActsCollectionAlgs.confdb2_part
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsRegionsOfInterest/ActsRegionsOfInterestConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsRegionsOfInterest.confdb, genConf/ActsRegionsOfInterest.confdb2_part
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsVertexReconstruction/ActsVertexReconstructionConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsVertexReconstruction.confdb, genConf/ActsVertexReconstruction.confdb2_part
+[ 77%] Built target Package_InDetDefectsEmulation
+[ 77%] Built target TrkExAlgsClidGen
+[ 77%] Built target ActsCollectionAlgsComponentsList
+[ 77%] Built target ActsGeometryComponentsList
+[ 77%] Built target Package_MuonGeometryCnv
+[ 77%] Built target ActsRegionsOfInterestComponentsList
+[ 77%] Linking CXX shared library ../../../../../x86_64-el9-gcc14-opt/lib/libxAODMuonPrepDataDict.so
+[ 77%] Built target Package_ActsEvent
+[ 77%] Built target Package_TrkExAlgs
+[ 77%] Generating DumpEventDataToJSON_clid.db
+[ 77%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonSpacePoint.so
+[ 77%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libActsCalibratorsLib.so
+[ 77%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libNSWCalibToolsLib.so
+[ 77%] Built target DumpEventDataToJSONConfigurables
+[ 77%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMdtCalibInterfacesLib.so
+[ 77%] Built target MuonGeoModelR4Configurables
+[ 77%] Built target ActsCollectionAlgsConfigurables
+[ 77%] Generating MuonGeoModelR4_clid.db
+[ 77%] Built target ActsGeometryConfigurables
+[ 77%] Built target ActsVertexReconstructionConfigurables
+[ 77%] Built target ActsRegionsOfInterestConfigurables
+Detaching debug info of libxAODMuonPrepDataDict.so into libxAODMuonPrepDataDict.so.dbg
+[ 77%] Generating ActsVertexReconstruction_clid.db
+[ 77%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsVertexReconstruction.components
+[ 77%] Built target Package_ActsCollectionAlgs
+Detaching debug info of libNSWCalibToolsLib.so into libNSWCalibToolsLib.so.dbg
+[ 77%] Built target Package_ActsGeometry
+[ 77%] Built target DumpEventDataToJSONClidGen
+[ 77%] Built target Package_ActsRegionsOfInterest
+[ 77%] Built target Package_DumpEventDataToJSON
+Detaching debug info of libMuonSpacePoint.so into libMuonSpacePoint.so.dbg
+Detaching debug info of libMdtCalibInterfacesLib.so into libMdtCalibInterfacesLib.so.dbg
+Detaching debug info of libActsCalibratorsLib.so into libActsCalibratorsLib.so.dbg
+[ 77%] Built target ActsVertexReconstructionComponentsList
+[ 77%] Built target NSWCalibToolsLib
+[ 77%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libNSWCalibTools.so
+[ 78%] Built target xAODMuonPrepDataDict
+[ 78%] Built target MuonGeoModelR4ClidGen
+[ 78%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libMuonMM_CnvTools.so
+[ 78%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libMuonSTGC_CnvTools.so
+[ 79%] Built target MdtCalibInterfacesLib
+[ 79%] Built target ActsVertexReconstructionClidGen
+[ 79%] Built target Package_xAODMuonPrepData
+[ 79%] Built target Package_MuonGeoModelR4
+[ 79%] Built target Package_MdtCalibInterfaces
+[ 79%] Built target Package_ActsVertexReconstruction
+[ 79%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libMuonMDT_CnvTools.so
+[ 79%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonCondAlg.so
+[ 79%] Built target ActsCalibratorsLib
+[ 79%] Built target MuonSpacePoint
+[ 79%] Linking CXX executable test-bin/MeasurementCalibratorBaseTest.exe
+[ 79%] Linking CXX executable test-bin/TrackFindingMeasurementsTest.exe
+[ 79%] Linking CXX executable test-bin/DuplicateSeedDetectorTest.exe
+[ 79%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libHGTD_RecAlgs.so
+[ 79%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsDataPreparation.so
+[ 79%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsMonitoring.so
+Detaching debug info of libNSWCalibTools.so into libNSWCalibTools.so.dbg
+[ 79%] Built target egammaAlgs
+[ 79%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsObjectDecoration.so
+Detaching debug info of libMuonMM_CnvTools.so into libMuonMM_CnvTools.so.dbg
+Detaching debug info of libMuonMDT_CnvTools.so into libMuonMDT_CnvTools.so.dbg
+[ 81%] Built target NSWCalibTools
+Detaching debug info of libMuonSTGC_CnvTools.so into libMuonSTGC_CnvTools.so.dbg
+[ 81%] Built target ActsCalibrators_MeasurementCalibratorBaseTest
+[ 81%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsPrdAssociation.so
+[ 81%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsTruth.so
+[ 81%] Built target ActsTrackReconstruction_DuplicateSeedDetectorTest
+[ 81%] Built target ActsTrackReconstruction_TrackFindingMeasurementsTest
+[ 81%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libNSWCalibTools.components
+[ 81%] Generating ../../../x86_64-el9-gcc14-opt/lib/libegammaAlgs.components
+Detaching debug info of libHGTD_RecAlgs.so into libHGTD_RecAlgs.so.dbg
+Detaching debug info of libActsPrdAssociation.so into libActsPrdAssociation.so.dbg
+[ 81%] Built target MuonMDT_CnvTools
+[ 81%] Generating ../../../../x86_64-el9-gcc14-opt/python/NSWCalibTools/NSWCalibToolsConf.py, ../../../../x86_64-el9-gcc14-opt/lib/libNSWCalibTools.confdb, genConf/NSWCalibTools.confdb2_part
+[ 82%] Built target MuonMM_CnvTools
+[ 82%] Built target NSWCalibToolsComponentsList
+[ 82%] Built target egammaAlgsComponentsList
+[ 82%] Generating ../../../x86_64-el9-gcc14-opt/python/MuonMDT_CnvTools/MuonMDT_CnvToolsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libMuonMDT_CnvTools.confdb, genConf/MuonMDT_CnvTools.confdb2_part
+[ 82%] Generating ../../../x86_64-el9-gcc14-opt/python/MuonMM_CnvTools/MuonMM_CnvToolsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libMuonMM_CnvTools.confdb, genConf/MuonMM_CnvTools.confdb2_part
+[ 82%] Built target ActsPrdAssociation
+Detaching debug info of libActsDataPreparation.so into libActsDataPreparation.so.dbg
+[ 82%] Built target MuonSTGC_CnvTools
+[ 82%] Generating ../../../x86_64-el9-gcc14-opt/python/egammaAlgs/egammaAlgsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libegammaAlgs.confdb, genConf/egammaAlgs.confdb2_part
+[ 82%] Built target Package_MuonSpacePoint
+[ 82%] Built target VP1TrackSystems_autogen_timestamp_deps
+[ 82%] Built target Package_ActsCalibrators_tests
+[ 82%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonPatternEvent.so
+Detaching debug info of libMuonCondAlg.so into libMuonCondAlg.so.dbg
+[ 82%] Built target Package_ActsTrackReconstruction_tests
+[ 82%] Generating NSWCalibTools_clid.db
+Detaching debug info of libActsTruth.so into libActsTruth.so.dbg
+Detaching debug info of libActsMonitoring.so into libActsMonitoring.so.dbg
+Detaching debug info of libActsObjectDecoration.so into libActsObjectDecoration.so.dbg
+[ 83%] Built target HGTD_RecAlgs
+[ 83%] Generating MuonMDT_CnvTools_clid.db
+Detaching debug info of libMuonPatternEvent.so into libMuonPatternEvent.so.dbg
+[ 83%] Built target NSWCalibToolsConfigurables
+[ 83%] Built target ActsDataPreparation
+[ 85%] Built target ActsTruth
+[ 85%] Built target MuonMM_CnvToolsConfigurables
+[ 85%] Generating MuonMM_CnvTools_clid.db
+[ 85%] Built target MuonMDT_CnvToolsConfigurables
+[ 85%] Built target egammaAlgsConfigurables
+[ 86%] Generating MuonSTGC_CnvTools_clid.db
+[ 86%] Generating egammaAlgs_clid.db
+[ 86%] Generating ActsDataPreparation_clid.db
+[ 86%] Generating ActsPrdAssociation_clid.db
+[ 86%] Generating ActsTruth_clid.db
+[ 86%] Built target NSWCalibToolsClidGen
+[ 86%] Built target MuonPatternEvent
+[ 86%] Generating ../../../x86_64-el9-gcc14-opt/lib/libHGTD_RecAlgs.components
+[ 86%] Built target ActsObjectDecoration
+[ 86%] Generating ../../../x86_64-el9-gcc14-opt/lib/libMuonMDT_CnvTools.components
+[ 86%] Built target MuonMDT_CnvToolsClidGen
+[ 87%] Built target ActsMonitoring
+[ 87%] Generating ../../../x86_64-el9-gcc14-opt/lib/libMuonMM_CnvTools.components
+[ 87%] Generating ../../../x86_64-el9-gcc14-opt/lib/libMuonSTGC_CnvTools.components
+[ 87%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsDataPreparation.components
+[ 89%] Built target MuonCondAlg
+[ 89%] Built target HGTD_RecAlgsComponentsList
+[ 89%] Built target MuonSTGC_CnvToolsClidGen
+[ 89%] Built target egammaAlgsClidGen
+[ 89%] Built target MuonMM_CnvToolsClidGen
+[ 89%] Built target ActsPrdAssociationClidGen
+[ 89%] Built target MuonMDT_CnvToolsComponentsList
+[ 89%] Built target ActsTruthClidGen
+[ 89%] Built target ActsDataPreparationClidGen
+[ 89%] Built target MuonMM_CnvToolsComponentsList
+[ 89%] Built target MuonSTGC_CnvToolsComponentsList
+[ 89%] Built target ActsDataPreparationComponentsList
+[ 90%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsPatternRecognition.so
+Detaching debug info of libActsPatternRecognition.so into libActsPatternRecognition.so.dbg
+[ 90%] Built target ActsPatternRecognition
+[ 90%] Built target Package_NSWCalibTools
+[ 90%] Built target Package_MuonMDT_CnvTools
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsTruth/ActsTruthConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsTruth.confdb, genConf/ActsTruth.confdb2_part
+[ 90%] Built target Package_MuonMM_CnvTools
+[ 90%] Built target Package_MuonPatternEvent
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsPrdAssociation/ActsPrdAssociationConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsPrdAssociation.confdb, genConf/ActsPrdAssociation.confdb2_part
+[ 90%] Built target Package_egammaAlgs
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsObjectDecoration/ActsObjectDecorationConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsObjectDecoration.confdb, genConf/ActsObjectDecoration.confdb2_part
+[ 90%] Built target Package_ActsCalibrators
+[ 90%] Built target VP1TrackSystems_autogen
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsMonitoring/ActsMonitoringConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsMonitoring.confdb, genConf/ActsMonitoring.confdb2_part
+[ 90%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonTruthHelpers.so
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsDataPreparation/ActsDataPreparationConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsDataPreparation.confdb, genConf/ActsDataPreparation.confdb2_part
+[ 90%] Generating HGTD_RecAlgs_clid.db
+[ 90%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonCondAlg/MuonCondAlgConf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonCondAlg.confdb, genConf/MuonCondAlg.confdb2_part
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/HGTD_RecAlgs/HGTD_RecAlgsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libHGTD_RecAlgs.confdb, genConf/HGTD_RecAlgs.confdb2_part
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/MuonSTGC_CnvTools/MuonSTGC_CnvToolsConf.py, ../../../x86_64-el9-gcc14-opt/lib/libMuonSTGC_CnvTools.confdb, genConf/MuonSTGC_CnvTools.confdb2_part
+Detaching debug info of libMuonTruthHelpers.so into libMuonTruthHelpers.so.dbg
+[ 90%] Built target ActsPrdAssociationConfigurables
+[ 90%] Built target ActsTruthConfigurables
+[ 90%] Built target ActsObjectDecorationConfigurables
+[ 90%] Built target MuonTruthHelpers
+[ 90%] Built target HGTD_RecAlgsClidGen
+[ 90%] Built target ActsDataPreparationConfigurables
+[ 90%] Built target ActsMonitoringConfigurables
+[ 90%] Built target MuonCondAlgConfigurables
+[ 90%] Built target MuonSTGC_CnvToolsConfigurables
+[ 90%] Built target HGTD_RecAlgsConfigurables
+Detaching debug info of libAtlasGeant4Lib.so into libAtlasGeant4Lib.so.dbg
+[ 90%] Built target AtlasGeant4Lib
+[ 90%] Built target Package_ActsDataPreparation
+[ 90%] Built target Package_MuonTruthHelpers
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsPatternRecognition/ActsPatternRecognitionConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsPatternRecognition.confdb, genConf/ActsPatternRecognition.confdb2_part
+[ 90%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackEvent.so
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsPatternRecognition.components
+[ 90%] Built target Package_HGTD_RecAlgs
+[ 90%] Built target Package_MuonSTGC_CnvTools
+[ 90%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libVP1TrackSystems.so
+[ 90%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonCondAlg.components
+[ 90%] Generating ActsPatternRecognition_clid.db
+[ 90%] Built target ActsPatternRecognitionComponentsList
+[ 90%] Generating ActsObjectDecoration_clid.db
+[ 90%] Generating ActsMonitoring_clid.db
+[ 90%] Generating MuonCondAlg_clid.db
+[ 90%] Built target MuonCondAlgComponentsList
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsTruth.components
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsPrdAssociation.components
+[ 90%] Built target ActsPatternRecognitionConfigurables
+[ 90%] Built target ActsPatternRecognitionClidGen
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsObjectDecoration.components
+[ 90%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsMonitoring.components
+[ 90%] Built target Package_ActsPatternRecognition
+Detaching debug info of libMuonTrackEvent.so into libMuonTrackEvent.so.dbg
+[ 90%] Built target ActsPrdAssociationComponentsList
+[ 90%] Built target ActsTruthComponentsList
+[ 90%] Built target MuonCondAlgClidGen
+[ 90%] Built target Package_ActsPrdAssociation
+[ 90%] Built target ActsObjectDecorationClidGen
+[ 90%] Built target Package_ActsTruth
+[ 90%] Built target Package_MuonCondAlg
+[ 90%] Built target ActsMonitoringClidGen
+[ 90%] Built target ActsObjectDecorationComponentsList
+[ 90%] Built target ActsMonitoringComponentsList
+[ 90%] Built target Package_ActsObjectDecoration
+[ 90%] Built target Package_ActsMonitoring
+[ 90%] Built target MuonTrackEvent
+[ 91%] Linking CXX executable test-bin/test_expandedSector.exe
+[ 91%] Linking CXX executable test-bin/test_summary.exe
+[ 91%] Linking CXX executable test-bin/test_circle.exe
+[ 91%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonVisualizationHelpersR4.so
+[ 91%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonTruthAlgsR4.so
+[ 91%] Built target MuonTrackEvent_test_expandedSector
+[ 91%] Built target MuonTrackEvent_test_summary
+[ 91%] Built target MuonTrackEvent_test_circle
+[ 91%] Built target Package_MuonTrackEvent_tests
+[ 91%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonPatternHelpers.so
+[ 91%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsEventCnv.so
+[ 91%] Built target atlas_tests
+[ 91%] Built target Package_MuonTrackEvent
+[ 91%] Linking CXX shared module ../../../x86_64-el9-gcc14-opt/lib/libActsTrackReconstruction.so
+Detaching debug info of libMuonVisualizationHelpersR4.so into libMuonVisualizationHelpersR4.so.dbg
+[ 91%] Built target MuonVisualizationHelpersR4
+Detaching debug info of libMuonTruthAlgsR4.so into libMuonTruthAlgsR4.so.dbg
+[ 91%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonVisualHelpersR4.so
+[ 91%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelTestR4.so
+Detaching debug info of libVP1TrackSystems.so into libVP1TrackSystems.so.dbg
+Detaching debug info of libMuonPatternHelpers.so into libMuonPatternHelpers.so.dbg
+Detaching debug info of libMuonVisualHelpersR4.so into libMuonVisualHelpersR4.so.dbg
+Detaching debug info of libActsEventCnv.so into libActsEventCnv.so.dbg
+[ 91%] Built target MuonVisualHelpersR4
+[ 91%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonVisualizationHelpersR4/MuonVisualHelpersR4Conf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonVisualHelpersR4.confdb, genConf/MuonVisualHelpersR4.confdb2_part
+[ 91%] Generating MuonVisualHelpersR4_clid.db
+[ 91%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonVisualHelpersR4.components
+Detaching debug info of libMuonGeoModelTestR4.so into libMuonGeoModelTestR4.so.dbg
+[ 93%] Built target MuonTruthAlgsR4
+[ 93%] Generating MuonTruthAlgsR4_clid.db
+[ 93%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonTruthAlgsR4.components
+[ 93%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonTruthAlgsR4/MuonTruthAlgsR4Conf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonTruthAlgsR4.confdb, genConf/MuonTruthAlgsR4.confdb2_part
+[ 93%] Built target MuonVisualHelpersR4ComponentsList
+[ 93%] Built target MuonVisualHelpersR4ClidGen
+[ 93%] Built target MuonVisualHelpersR4Configurables
+[ 93%] Built target Package_MuonVisualizationHelpersR4
+[ 93%] Built target MuonTruthAlgsR4ComponentsList
+[ 93%] Built target MuonPatternHelpers
+[ 93%] Built target MuonTruthAlgsR4ClidGen
+[ 93%] Built target Package_MuonPatternHelpers
+[ 93%] Linking CXX shared library ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingToolsLib.so
+[ 93%] Built target MuonTruthAlgsR4Configurables
+[ 93%] Built target Package_MuonTruthAlgsR4
+[ 95%] Built target VP1TrackSystems
+[ 95%] Built target Package_VP1TrackSystems
+[ 97%] Built target MuonGeoModelTestR4
+[ 97%] Generating MuonGeoModelTestR4_clid.db
+[ 97%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelTestR4.components
+[ 97%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonGeoModelTestR4/MuonGeoModelTestR4Conf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonGeoModelTestR4.confdb, genConf/MuonGeoModelTestR4.confdb2_part
+[ 98%] Built target ActsEventCnv
+[ 98%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsEventCnv.components
+[ 98%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsEventCnv/ActsEventCnvConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsEventCnv.confdb, genConf/ActsEventCnv.confdb2_part
+[ 98%] Generating ActsEventCnv_clid.db
+Detaching debug info of libActsTrackReconstruction.so into libActsTrackReconstruction.so.dbg
+Detaching debug info of libMuonTrackFindingToolsLib.so into libMuonTrackFindingToolsLib.so.dbg
+[ 98%] Built target MuonGeoModelTestR4ComponentsList
+[ 98%] Built target ActsEventCnvComponentsList
+[ 98%] Built target MuonGeoModelTestR4ClidGen
+[ 98%] Built target MuonTrackFindingToolsLib
+[ 98%] Built target ActsEventCnvClidGen
+[ 98%] Built target MuonGeoModelTestR4Configurables
+[ 98%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingTools.so
+[ 98%] Linking CXX shared module ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingAlgs.so
+[ 98%] Built target Package_MuonGeoModelTestR4
+[ 98%] Built target ActsEventCnvConfigurables
+[ 98%] Built target Package_ActsEventCnv
+Detaching debug info of libMuonTrackFindingTools.so into libMuonTrackFindingTools.so.dbg
+Detaching debug info of libMuonTrackFindingAlgs.so into libMuonTrackFindingAlgs.so.dbg
+[ 98%] Built target MuonTrackFindingTools
+[ 98%] Generating MuonTrackFindingTools_clid.db
+[ 98%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonTrackFindingTools/MuonTrackFindingToolsConf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingTools.confdb, genConf/MuonTrackFindingTools.confdb2_part
+[ 98%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingTools.components
+[ 98%] Built target MuonTrackFindingAlgs
+[ 98%] Generating ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingAlgs.components
+[ 98%] Generating MuonTrackFindingAlgs_clid.db
+[ 98%] Generating ../../../../x86_64-el9-gcc14-opt/python/MuonTrackFindingAlgs/MuonTrackFindingAlgsConf.py, ../../../../x86_64-el9-gcc14-opt/lib/libMuonTrackFindingAlgs.confdb, genConf/MuonTrackFindingAlgs.confdb2_part
+[ 98%] Built target MuonTrackFindingToolsComponentsList
+[ 98%] Built target MuonTrackFindingAlgsComponentsList
+[ 98%] Built target MuonTrackFindingToolsClidGen
+[ 98%] Built target MuonTrackFindingToolsConfigurables
+[ 98%] Built target Package_MuonTrackFindingTools
+[ 98%] Built target MuonTrackFindingAlgsClidGen
+[ 98%] Built target MuonTrackFindingAlgsConfigurables
+[ 98%] Built target Package_MuonTrackFindingAlgs
+Detaching debug info of libAtlasGeant4.so into libAtlasGeant4.so.dbg
+[100%] Built target ActsTrackReconstruction
+[100%] Generating ActsTrackReconstruction_clid.db
+[100%] Generating ../../../x86_64-el9-gcc14-opt/python/ActsTrackReconstruction/ActsTrackReconstructionConf.py, ../../../x86_64-el9-gcc14-opt/lib/libActsTrackReconstruction.confdb, genConf/ActsTrackReconstruction.confdb2_part
+[100%] Generating ../../../x86_64-el9-gcc14-opt/lib/libActsTrackReconstruction.components
+[100%] Built target ActsTrackReconstructionComponentsList
+[100%] Built target ActsTrackReconstructionClidGen
+[100%] Built target ActsTrackReconstructionConfigurables
+[100%] Built target Package_ActsTrackReconstruction
+[100%] Built target AtlasGeant4
+[100%] Generating AtlasGeant4_clid.db
+[100%] Generating ../../x86_64-el9-gcc14-opt/lib/libAtlasGeant4.components
+[100%] Generating ../../x86_64-el9-gcc14-opt/python/AtlasGeant4/AtlasGeant4Conf.py, ../../x86_64-el9-gcc14-opt/lib/libAtlasGeant4.confdb, genConf/AtlasGeant4.confdb2_part
+[100%] Built target AtlasGeant4ComponentsList
+[100%] Built /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/lib/WorkDir.components
+[100%] Built target AtlasGeant4ClidGen
+[100%] Built /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/share/clid.db
+[100%] Built target AtlasGeant4Configurables
+[100%] Built /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/lib/WorkDir.confdb
+[100%] Built /home/jburzyns/ATLAS/Tracking/ITk/GBTS_LRT/build_customActs/x86_64-el9-gcc14-opt/lib/WorkDir.confdb2
+[100%] Built target Package_AtlasGeant4
+[100%] Built target WorkDirComponentsMerge
+[100%] Built target WorkDirClidMerge
+[100%] Built target WorkDirConfdbMerge
+[100%] Built target WorkDirConfdb2Merge
+BUILD-SCRIPT: make exit code 0
+BUILD-SCRIPT: BUILD SUCCEEDED

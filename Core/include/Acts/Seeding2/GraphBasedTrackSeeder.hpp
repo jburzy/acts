@@ -110,6 +110,12 @@ class GraphBasedTrackSeeder {
     /// Assumed z0 resolution when accepting adjacent bins of the z0 bitmask
     /// histogram used for edge pruning on the entry layer
     float z0HistoResolution = 2.5f;
+    /// Upper limit on the displaced-track phi-window widening
+    /// asin(d0Max/r1) - asin(d0Max/r2) applied per layer pair in lrtMode.
+    /// Tracks whose position-azimuth swing exceeds the cap lose their
+    /// inner-layer doublets but can still seed from outer layer pairs where
+    /// the swing is smaller. Effectively uncapped by default.
+    float maxPhiWindowD0 = 10.0f;
     /// When old tunings are used, this defines the minimum phi window used
     float minDeltaPhi = 0.001f;
     /// Maximum radius of pixel detector
