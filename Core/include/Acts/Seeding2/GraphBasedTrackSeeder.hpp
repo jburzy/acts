@@ -65,15 +65,6 @@ class GraphBasedTrackSeeder {
     /// correction applied to tau acceptance
     /// if a layer is missed during edge connecting
     float tauRatioCorr = 0.006;
-    /// Tolerance added to the triplet's implied impact parameter before it is
-    /// used to scale the displaced-track cut widenings (covers the estimate's
-    /// multiple-scattering resolution at threshold pT). Only used in lrtMode.
-    float d0EstTolerance = 25.0f;
-    /// Strip space-point z mis-measurement per unit impact parameter for
-    /// tracks not compatible with the beamline constraint used in space-point
-    /// formation. Adds a measurement term to the tau-matching acceptance,
-    /// scaled by the triplet's implied impact parameter. 0 disables the term.
-    float tauRatioZBiasCoeff = 0.0f;
     /// the maximum allowed eta value in which
     /// three spacepoint seeds are passed through
     float maxAbsEtaAddTripelts = 1.5;
