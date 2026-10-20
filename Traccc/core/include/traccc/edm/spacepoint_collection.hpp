@@ -186,6 +186,76 @@ class spacepoint : public BASE {
 
   /// @}
 
+  /// @name Strip Spacepoint Information
+  ///
+  /// Geometry of the two strips forming a strip spacepoint, used to move the
+  /// spacepoint along the strips for a given track direction during seeding.
+  /// All zero for spacepoints that are not formed from strip pairs.
+  ///
+  /// @{
+
+  /// Centre of the outer strip (non-const)
+  ///
+  /// @return A (non-const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE auto& strip_outer_center() {
+    return BASE::template get<5>();
+  }
+  /// Centre of the outer strip (const)
+  ///
+  /// @return A (const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE const auto& strip_outer_center() const {
+    return BASE::template get<5>();
+  }
+
+  /// Half length vector of the inner strip (non-const)
+  ///
+  /// @return A (non-const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE auto& strip_inner_half_vector() {
+    return BASE::template get<6>();
+  }
+  /// Half length vector of the inner strip (const)
+  ///
+  /// @return A (const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE const auto& strip_inner_half_vector() const {
+    return BASE::template get<6>();
+  }
+
+  /// Half length vector of the outer strip (non-const)
+  ///
+  /// @return A (non-const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE auto& strip_outer_half_vector() {
+    return BASE::template get<7>();
+  }
+  /// Half length vector of the outer strip (const)
+  ///
+  /// @return A (const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE const auto& strip_outer_half_vector() const {
+    return BASE::template get<7>();
+  }
+
+  /// Vector from the inner to the outer strip centre (non-const)
+  ///
+  /// @return A (non-const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE auto& strip_inner_to_outer_separation() {
+    return BASE::template get<8>();
+  }
+  /// Vector from the inner to the outer strip centre (const)
+  ///
+  /// @return A (const) vector of @c std::array<float,3> values
+  ///
+  TRACCC_HOST_DEVICE const auto& strip_inner_to_outer_separation() const {
+    return BASE::template get<8>();
+  }
+
+  /// @}
+
   /// @name Utility functions
   /// @{
 
@@ -229,7 +299,15 @@ using spacepoint_collection =
                            // z_variance
                            vecmem::edm::type::vector<float>,
                            // radius_variance
-                           vecmem::edm::type::vector<float>>;
+                           vecmem::edm::type::vector<float>,
+                           // strip_outer_center
+                           vecmem::edm::type::vector<std::array<float, 3u>>,
+                           // strip_inner_half_vector
+                           vecmem::edm::type::vector<std::array<float, 3u>>,
+                           // strip_outer_half_vector
+                           vecmem::edm::type::vector<std::array<float, 3u>>,
+                           // strip_inner_to_outer_separation
+                           vecmem::edm::type::vector<std::array<float, 3u>>>;
 
 }  // namespace traccc::edm
 

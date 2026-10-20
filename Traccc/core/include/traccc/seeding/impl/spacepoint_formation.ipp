@@ -44,6 +44,10 @@ TRACCC_HOST_DEVICE inline void fill_pixel_spacepoint(
   sp.z() = static_cast<float>(getter::element(global, 2u));
   sp.radius_variance() = 0.f;
   sp.z_variance() = 0.f;
+  sp.strip_outer_center() = {0.f, 0.f, 0.f};
+  sp.strip_inner_half_vector() = {0.f, 0.f, 0.f};
+  sp.strip_outer_half_vector() = {0.f, 0.f, 0.f};
+  sp.strip_inner_to_outer_separation() = {0.f, 0.f, 0.f};
 }
 
 }  // namespace traccc::details
