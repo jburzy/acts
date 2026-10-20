@@ -13,6 +13,7 @@
 #include "traccc/seeding/detail/lin_circle.hpp"
 #include "traccc/seeding/detail/seeding_config.hpp"
 #include "traccc/seeding/detail/triplet.hpp"
+#include "traccc/seeding/seed_confirmation_helper.hpp"
 #include "traccc/seeding/triplet_finding_helper.hpp"
 #include "traccc/utils/messaging.hpp"
 
@@ -80,15 +81,31 @@ struct triplet_finding : public messaging {
         m_finding_config.sigmaScattering * m_finding_config.sigmaScattering;
     scalar curvature, impact_parameter;
 
+    // Doublet quantities of the strip aware triplet finding
+    const edm::spacepoint_collection::const_device::const_proxy_type spB =
+        spacepoints.at(sp_grid.bin(
+            mid_bot_doublet.sp2.bin_idx)[mid_bot_doublet.sp2.sp_idx]);
+    const strip_triplet_context strip_ctx(spM, spB, mid_bot_lc,
+                                          m_finding_config, iSinTheta2,
+                                          scatteringInRegion2);
+
     // Compare this mid-bottom doublet with all the mid-top doublets.
     assert(mid_top_doublets.size() == mid_top_lcs.size());
     for (std::size_t i = 0; i < mid_top_doublets.size(); ++i) {
       const doublet& mid_top_doublet = mid_top_doublets.at(i);
       const lin_circle& mid_top_lc = mid_top_lcs.at(i);
 
-      if (!triplet_finding_helper::isCompatible(
-              spM, mid_bot_lc, mid_top_lc, m_finding_config, iSinTheta2,
-              scatteringInRegion2, curvature, impact_parameter)) {
+      const bool compatible =
+          m_finding_config.useStripInfo
+              ? triplet_finding_helper::isCompatibleStrip(
+                    strip_ctx,
+                    spacepoints.at(sp_grid.bin(mid_top_doublet.sp2.bin_idx)
+                                       [mid_top_doublet.sp2.sp_idx]),
+                    mid_top_lc, m_finding_config, curvature, impact_parameter)
+              : triplet_finding_helper::isCompatible(
+                    spM, mid_bot_lc, mid_top_lc, m_finding_config, iSinTheta2,
+                    scatteringInRegion2, curvature, impact_parameter);
+      if (!compatible) {
         continue;
       }
 
@@ -97,7 +114,8 @@ struct triplet_finding : public messaging {
                         mid_top_doublet.sp2,  // top
                         curvature,            // curvature
                         -impact_parameter * m_filter_config.impactWeightFactor,
-                        mid_bot_lc.Zo()});
+                        mid_bot_lc.Zo(), impact_parameter, mid_bot_lc.cotTheta(),
+                        0u, false});
     }
 
     // Set the triplet weights in a super complicated double loop over the
@@ -108,7 +126,9 @@ struct triplet_finding : public messaging {
       const edm::spacepoint_collection::const_device::const_proxy_type
           current_spT = spacepoints.at(
               sp_grid.bin(current_spT_idx.bin_idx)[current_spT_idx.sp_idx]);
-      const scalar currentTop_r = current_spT.radius();
+      const scalar currentTop_r = seed_confirmation_helper::top_radius(
+          m_filter_config, spM.radius(), spM.z(), current_spT.radius(),
+          current_spT.z());
 
       // if two compatible seeds with high distance in r are found,
       // compatible seeds span 5 layers
@@ -131,7 +151,9 @@ struct triplet_finding : public messaging {
                 sp_grid.bin(other_spT_idx.bin_idx)[other_spT_idx.sp_idx]);
 
         // compared top SP should have at least deltaRMin distance
-        const scalar otherTop_r = other_spT.radius();
+        const scalar otherTop_r = seed_confirmation_helper::top_radius(
+            m_filter_config, spM.radius(), spM.z(), other_spT.radius(),
+            other_spT.z());
         const scalar deltaR = currentTop_r - otherTop_r;
         if (std::abs(deltaR) < m_filter_config.deltaRMin) {
           continue;
@@ -170,6 +192,13 @@ struct triplet_finding : public messaging {
           break;
         }
       }
+
+      current_triplet.n_compat =
+          static_cast<unsigned int>(compatibleSeedR.size());
+      current_triplet.weight += seed_confirmation_helper::extra_weight(
+          m_filter_config, current_triplet.n_compat,
+          current_triplet.impact_parameter, current_triplet.z_vertex,
+          current_triplet.cot_theta);
     }
 
     // Return the reconstructed triplets.

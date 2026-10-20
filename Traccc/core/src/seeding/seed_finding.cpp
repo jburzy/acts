@@ -23,6 +23,7 @@ struct seed_finding::impl {
        const seedfilter_config& filter_config, vecmem::memory_resource& mr,
        std::unique_ptr<const Logger> logger)
       : m_finder_config(finder_config),
+        m_filter_config(filter_config),
         m_midBot_finding(finder_config, mr,
                          logger->cloneWithSuffix("MidBotAlg")),
         m_midTop_finding(finder_config, mr,
@@ -35,6 +36,8 @@ struct seed_finding::impl {
 
   /// The seed finding configuration
   seedfinder_config m_finder_config;
+  /// The seed filter configuration
+  seedfilter_config m_filter_config;
   /// Algorithm performing the mid bottom doublet finding
   doublet_finding<traccc::details::spacepoint_type::bottom> m_midBot_finding;
   /// Algorithm performing the mid top doublet finding
@@ -69,6 +72,9 @@ edm::seed_collection::host seed_finding::operator()(
 
   // Create a device container for the spacepoints.
   const edm::spacepoint_collection::const_device spacepoints{sp_view};
+
+  // Best seed weight per spacepoint, for the seed confirmation
+  seed_filtering::best_weight_map best_weights;
 
   // Iterate over the spacepoint grid's bins.
   for (unsigned int i = 0; i < sp_grid.nbins(); ++i) {
@@ -121,7 +127,12 @@ edm::seed_collection::host seed_finding::operator()(
       }
 
       // seed filtering
-      m_impl->m_seed_filtering(spacepoints, sp_grid, triplets, seeds);
+      if (m_impl->m_filter_config.seedConfirmation) {
+        m_impl->m_seed_filtering(spacepoints, sp_grid, triplets, best_weights,
+                                 seeds);
+      } else {
+        m_impl->m_seed_filtering(spacepoints, sp_grid, triplets, seeds);
+      }
     }
   }
 

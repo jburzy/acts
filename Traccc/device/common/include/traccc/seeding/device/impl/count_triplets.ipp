@@ -75,6 +75,10 @@ inline void count_triplets(
   // triplet_finding_helper::isCompatible but their values are irrelevant
   scalar curvature, impact_parameter;
 
+  // Doublet quantities of the strip aware triplet finding
+  const strip_triplet_context strip_ctx(spM, spB, lb, config, iSinTheta2,
+                                        scatteringInRegion2);
+
   // find the reference (start) index of the mid-top doublet container
   // item vector, where the doublets are recorded
   const unsigned int mt_start_idx = doublet_counts.m_posMidTop;
@@ -95,9 +99,14 @@ inline void count_triplets(
         traccc::details::spacepoint_type::top>(spM, spT);
 
     // Check if mid-bot and mid-top doublets can form a triplet
-    if (triplet_finding_helper::isCompatible(spM, lb, lt, config, iSinTheta2,
-                                             scatteringInRegion2, curvature,
-                                             impact_parameter)) {
+    const bool compatible =
+        config.useStripInfo
+            ? triplet_finding_helper::isCompatibleStrip(
+                  strip_ctx, spT, lt, config, curvature, impact_parameter)
+            : triplet_finding_helper::isCompatible(
+                  spM, lb, lt, config, iSinTheta2, scatteringInRegion2,
+                  curvature, impact_parameter);
+    if (compatible) {
       num_triplets_per_mb++;
     }
   }

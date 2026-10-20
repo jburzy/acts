@@ -9,10 +9,14 @@
 #include "seed_filtering.hpp"
 
 #include "traccc/seeding/detail/triplet_sorter.hpp"
+#include "traccc/seeding/seed_confirmation_helper.hpp"
 #include "traccc/seeding/seed_selecting_helper.hpp"
 
 // System include(s).
 #include <algorithm>
+#include <array>
+#include <limits>
+#include <vector>
 
 namespace traccc::host::details {
 
@@ -56,14 +60,16 @@ void seed_filtering::operator()(
     const edm::spacepoint_collection::const_device::const_proxy_type spT =
         spacepoints.at(spT_idx);
 
-    // Updat the triplet weight in-situ.
-    seed_selecting_helper::seed_weight(m_filter_config, spM, spB, spT,
-                                       triplet.weight);
+    if (m_filter_config.useTracccSeedCuts) {
+      // Updat the triplet weight in-situ.
+      seed_selecting_helper::seed_weight(m_filter_config, spM, spB, spT,
+                                         triplet.weight);
 
-    // Check if the triplet passes the single seed cuts.
-    if (!seed_selecting_helper::single_seed_cut(m_filter_config, spM, spB, spT,
-                                                triplet.weight)) {
-      continue;
+      // Check if the triplet passes the single seed cuts.
+      if (!seed_selecting_helper::single_seed_cut(m_filter_config, spM, spB,
+                                                  spT, triplet.weight)) {
+        continue;
+      }
     }
 
     // If so, keep a pointer to it.
@@ -94,7 +100,8 @@ void seed_filtering::operator()(
       const traccc::details::spacepoint_grid_types::const_device
           sp_grid_accessor(sp_grid_data);
       const auto& this_seed = triplets_passing_single_seed_cuts[i].get();
-      if (seed_selecting_helper::cut_per_middle_sp(
+      if (!m_filter_config.useTracccSeedCuts ||
+          seed_selecting_helper::cut_per_middle_sp(
               m_filter_config,
               spacepoints.at(sp_grid_accessor.bin(
                   this_seed.sp1.bin_idx)[this_seed.sp1.sp_idx]),
@@ -115,6 +122,116 @@ void seed_filtering::operator()(
                      sp_grid.bin(triplet.sp2.bin_idx)[triplet.sp2.sp_idx],
                      sp_grid.bin(triplet.sp3.bin_idx)[triplet.sp3.sp_idx],
                      static_cast<float>(triplet.weight)});
+  }
+}
+
+void seed_filtering::operator()(
+    const edm::spacepoint_collection::const_device& spacepoints,
+    const traccc::details::spacepoint_grid_types::host& sp_grid,
+    triplet_collection_types::host& triplets, best_weight_map& best_weights,
+    edm::seed_collection::host& seeds) const {
+
+  if (triplets.empty()) {
+    return;
+  }
+  const auto sp_index = [&sp_grid](const sp_location& loc) {
+    return sp_grid.bin(loc.bin_idx)[loc.sp_idx];
+  };
+  const auto best_weight = [&best_weights](unsigned int sp) {
+    const auto it = best_weights.find(sp);
+    return it == best_weights.end() ? -std::numeric_limits<scalar>::infinity()
+                                    : it->second;
+  };
+  const auto spM = spacepoints.at(sp_index(triplets.front().sp2));
+
+  // Candidates of the middle spacepoint: quality seeds and the others
+  std::vector<triplet> quality;
+  std::vector<triplet> others;
+  const auto push_bounded = [](std::vector<triplet>& arr,
+                               const unsigned int max_n, const triplet& t) {
+    if (max_n == 0u) {
+      return;
+    }
+    if (arr.size() < max_n) {
+      arr.push_back(t);
+      return;
+    }
+    auto worst = std::min_element(arr.begin(), arr.end());
+    if (worst->weight < t.weight) {
+      *worst = t;
+    }
+  };
+
+  // The triplets are grouped by their bottom spacepoint
+  std::size_t i = 0;
+  while (i < triplets.size()) {
+    const sp_location spB_loc = triplets[i].sp1;
+    std::size_t group_end = i;
+    while (group_end < triplets.size() &&
+           triplets[group_end].sp1.bin_idx == spB_loc.bin_idx &&
+           triplets[group_end].sp1.sp_idx == spB_loc.sp_idx) {
+      ++group_end;
+    }
+    const unsigned int spB_idx = sp_index(spB_loc);
+    const auto spB = spacepoints.at(spB_idx);
+    const scalar spB_r = spB.radius();
+    const unsigned int n_quality = static_cast<unsigned int>(quality.size());
+
+    if (group_end - i < seed_confirmation_helper::min_top_candidates(
+                            m_filter_config, spB_r, spM.z(), n_quality)) {
+      i = group_end;
+      continue;
+    }
+    const seed_confirmation_range& rng =
+        seed_confirmation_helper::range(m_filter_config, spB.z());
+
+    bool has_other = false;
+    triplet best_other{};
+    for (std::size_t j = i; j < group_end; ++j) {
+      triplet t = triplets[j];
+      if (!seed_confirmation_helper::confirm(
+              m_filter_config, rng, spB_r, t.impact_parameter, t.z_vertex,
+              t.n_compat, static_cast<unsigned int>(quality.size()), t.weight,
+              t.quality)) {
+        continue;
+      }
+      if (t.weight < best_weight(spB_idx) &&
+          t.weight < best_weight(sp_index(t.sp2)) &&
+          t.weight < best_weight(sp_index(t.sp3))) {
+        continue;
+      }
+      if (t.quality) {
+        push_bounded(quality, m_filter_config.maxQualitySeedsPerSpMConf, t);
+      } else if (!has_other || t.weight > best_other.weight) {
+        best_other = t;
+        has_other = true;
+      }
+    }
+    if (has_other && quality.empty()) {
+      push_bounded(others, m_filter_config.maxSeedsPerSpMConf, best_other);
+    }
+    i = group_end;
+  }
+
+  // Only quality seeds are kept if any were found
+  std::vector<triplet>& selected = quality.empty() ? others : quality;
+  std::sort(selected.begin(), selected.end(),
+            [](const triplet& a, const triplet& b) { return b < a; });
+  const std::size_t max_seeds =
+      std::min(selected.size(),
+               static_cast<std::size_t>(m_finder_config.maxSeedsPerSpM) + 1u);
+  for (std::size_t k = 0; k < max_seeds; ++k) {
+    const triplet& t = selected[k];
+    const std::array<unsigned int, 3> sp{sp_index(t.sp1), sp_index(t.sp2),
+                                         sp_index(t.sp3)};
+    if (t.weight < best_weight(sp[0]) && t.weight < best_weight(sp[1]) &&
+        t.weight < best_weight(sp[2])) {
+      continue;
+    }
+    for (const unsigned int s : sp) {
+      best_weights[s] = std::max(best_weight(s), t.weight);
+    }
+    seeds.push_back({sp[0], sp[1], sp[2], static_cast<float>(t.weight)});
   }
 }
 

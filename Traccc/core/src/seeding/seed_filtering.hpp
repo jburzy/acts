@@ -20,6 +20,7 @@
 
 // System include(s).
 #include <functional>
+#include <unordered_map>
 
 namespace traccc::host::details {
 
@@ -43,6 +44,26 @@ class seed_filtering : public messaging {
   void operator()(const edm::spacepoint_collection::const_device& spacepoints,
                   const traccc::details::spacepoint_grid_types::host& sp_grid,
                   triplet_collection_types::host& triplets,
+                  edm::seed_collection::host& seeds) const;
+
+  /// Best seed weight per spacepoint, used by the seed confirmation across
+  /// middle spacepoints
+  using best_weight_map = std::unordered_map<unsigned int, scalar>;
+
+  /// Seed filtering with seed confirmation
+  ///
+  /// @param[in] spacepoints All spacepoints in the event
+  /// @param[in] sp_grid The spacepoint grid
+  /// @param[in,out] triplets is the vector of triplets per middle spacepoint,
+  ///                grouped by their bottom spacepoint
+  /// @param[in,out] best_weights the best seed weight per spacepoint
+  /// @param[out] seeds are the vector of seeds where the new compatible seeds
+  ///             are added
+  ///
+  void operator()(const edm::spacepoint_collection::const_device& spacepoints,
+                  const traccc::details::spacepoint_grid_types::host& sp_grid,
+                  triplet_collection_types::host& triplets,
+                  best_weight_map& best_weights,
                   edm::seed_collection::host& seeds) const;
 
  private:
