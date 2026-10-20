@@ -86,6 +86,14 @@ struct seedfinder_config {
   float doubletDPhiCap = 10.f;
   // maximum difference of the cot(theta) of the two doublets of a triplet
   float cotThetaDiffMax = std::numeric_limits<float>::infinity();
+  // use the strip geometry of the spacepoints in the triplet finding: the
+  // spacepoints are moved along their strips to the crossing of the triplet
+  // direction, and triplets whose crossing falls outside a strip are
+  // rejected
+  bool useStripInfo = false;
+  // tolerance of the strip crossing check, as a fraction of the strip half
+  // length
+  float toleranceParam = 1.1f;
 
   // FIXME: this is not used yet
   //        float upperPtResolutionPerSeed = 20* Acts::GeV;
