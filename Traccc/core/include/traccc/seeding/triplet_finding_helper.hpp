@@ -205,6 +205,12 @@ inline bool TRACCC_HOST_DEVICE triplet_finding_helper::isCompatibleStrip(
     scalar& impact_parameter) {
   using vector3_t = std::array<scalar, 3>;
 
+  const scalar deltaCotTheta0 = ctx.cotThetaB0 - lt.cotTheta();
+  if (deltaCotTheta0 * deltaCotTheta0 >
+      config.cotThetaDiffMax * config.cotThetaDiffMax) {
+    return false;
+  }
+
   // protects against division by 0
   const scalar dU0 = lt.U() - ctx.Ub0;
   if (dU0 == 0.f) {
